@@ -1,0 +1,169 @@
+[gd_scene load_steps=3 format=3 uid="uid://c42rweiaeoe1l"]
+
+[ext_resource type="Script" path="res://UI/Control_UI.gd" id="1_0e0h2"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_2maix"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_0e0h2")
+
+[node name="die1" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 155.0
+offset_top = 542.0
+offset_right = 225.0
+offset_bottom = 612.0
+icon = SubResource("ViewportTexture_2maix")
+
+[node name="die2" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 250.0
+offset_top = 542.0
+offset_right = 320.0
+offset_bottom = 612.0
+icon = SubResource("ViewportTexture_2maix")
+
+[node name="die3" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 340.0
+offset_top = 542.0
+offset_right = 410.0
+offset_bottom = 612.0
+icon = SubResource("ViewportTexture_2maix")
+
+[node name="die4" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 425.0
+offset_top = 543.0
+offset_right = 495.0
+offset_bottom = 613.0
+icon = SubResource("ViewportTexture_2maix")
+
+[node name="die5" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 514.0
+offset_top = 543.0
+offset_right = 584.0
+offset_bottom = 613.0
+icon = SubResource("ViewportTexture_2maix")
+
+[node name="die6" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 602.0
+offset_top = 543.0
+offset_right = 672.0
+offset_bottom = 613.0
+icon = SubResource("ViewportTexture_2maix")
+
+[node name="test_roll" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 465.0
+offset_top = 206.0
+offset_right = 682.0
+offset_bottom = 276.0
+text = "Compete for roll"
+icon = SubResource("ViewportTexture_2maix")
+
+[node name="yourdie" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 936.0
+offset_top = 544.0
+offset_right = 1006.0
+offset_bottom = 614.0
+icon = SubResource("ViewportTexture_2maix")
+
+[node name="roll-day" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 58.0
+offset_top = 544.0
+offset_right = 128.0
+offset_bottom = 614.0
+text = "Roll Daily"
+icon = SubResource("ViewportTexture_2maix")
+
+[node name="option1" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 868.0
+offset_top = 257.0
+offset_right = 1098.0
+offset_bottom = 327.0
+text = "Continue to winning element"
+icon = SubResource("ViewportTexture_2maix")
+
+[node name="option2" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 62.0
+offset_top = 243.0
+offset_right = 292.0
+offset_bottom = 313.0
+text = "Continue to last element"
+icon = SubResource("ViewportTexture_2maix")
+
+[node name="pay" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 887.0
+offset_top = 23.0
+offset_right = 1117.0
+offset_bottom = 93.0
+text = "Pay money"
+icon = SubResource("ViewportTexture_2maix")
+
+[node name="lose" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 463.0
+offset_top = 124.0
+offset_right = 693.0
+offset_bottom = 194.0
+text = "Lose money"
+icon = SubResource("ViewportTexture_2maix")
+
+[node name="selected" type="RichTextLabel" parent="Control"]
+layout_mode = 0
+offset_left = 207.0
+offset_top = 8.0
+offset_right = 431.0
+offset_bottom = 80.0
+
+[node name="position-label" type="RichTextLabel" parent="Control"]
+layout_mode = 0
+offset_left = 353.0
+offset_top = 444.0
+offset_right = 854.0
+offset_bottom = 516.0
+text = "sdlkasldjsalkjdklajdkljakjddlkasjkdasldjaklsdjlskajdlkajsdlka"
+
+[node name="win-position" type="RichTextLabel" parent="Control"]
+layout_mode = 0
+offset_left = 666.0
+offset_top = 342.0
+offset_right = 1167.0
+offset_bottom = 414.0
+text = "sdlkasldjsalkjdklajdkljakjddlkasjkdasldjaklsdjlskajdlkajsdlka"
+
+[node name="lose-position" type="RichTextLabel" parent="Control"]
+layout_mode = 0
+offset_left = 49.0
+offset_top = 327.0
+offset_right = 550.0
+offset_bottom = 399.0
+text = "sdlkasldjsalkjdklajdkljakjddlkasjkdasldjaklsdjlskajdlkajsdlka"
+
+[node name="results" type="RichTextLabel" parent="Control"]
+layout_mode = 0
+offset_left = 476.0
+offset_top = 13.0
+offset_right = 575.0
+offset_bottom = 85.0
+
+[node name="whowins" type="RichTextLabel" parent="Control"]
+layout_mode = 0
+offset_left = 624.0
+offset_top = 18.0
+offset_right = 840.0
+offset_bottom = 90.0
