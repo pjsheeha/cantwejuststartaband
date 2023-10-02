@@ -1,0 +1,8 @@
+ea4bc82a6ad023ab7ee23ee620429895
+::res://::1696188829
+my_scene.json::JSON::-1::1695945846::0::1::::<><>::
+test.tscn::PackedScene::7158594814484015367::1695867805::0::1::::<><>::
+::res://Scenes/::1695761370
+::res://UI/::1695952102
+Control_UI.gd::GDScript::-1::1695952102::0::1::::<>Control<>::
+ui.tscn::PackedScene::6865127731049429823::1695952102::0::1::::<><>::res://UI/Control_UI.gd

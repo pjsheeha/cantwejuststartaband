@@ -1,15 +1,1015 @@
-
 {
-	"lol":[
+	"stages": [
 		{
-			"name": "ello"
-		},
-				{
-			"name": "f"
+			"id": 0,
+			"title": "Fought in court successfully!",
+			"description": "You were able to fight the violation in court.",
+			"value": 0,
+			"type": "a",
+			"spacesForward": 81,
+			"substituteIf": "",
+			"substituteObject": {}
 		},
 		{
-			"name": "governor"
+			"id": 1,
+			"title": "CONTEST",
+			"description": "Get fined for a parking violation",
+			"value": 0,
+			"type": "contest",
+			"spacesForward": 0,
+			"substituteIf": "",
+			"substituteObject": {}
+		},
+		{
+			"id": 2,
+			"title": "Lose $100",
+			"description": "",
+			"value": 0,
+			"type": "a",
+			"spacesForward": 79,
+			"substituteIf": "",
+			"substituteObject": {}
+		},
+		{
+			"id": 3,
+			"title": "Commute back home",
+			"description": "",
+			"value": 0,
+			"type": "a",
+			"spacesForward": -2,
+			"substituteIf": "",
+			"substituteObject": {}
+		},
+		{
+			"id": 4,
+			"title": "Roll and multiply by $100, add to $700",
+			"description": "",
+			"value": 700,
+			"type": "rollpaydayboss",
+			"spacesForward": -1,
+			"substituteIf": "",
+			"substituteObject": {}
+		},
+		{
+			"id": 5,
+			"title": "Payday!",
+			"description": "Get $700",
+			"value": 700,
+			"type": "payday",
+			"spacesForward": -2,
+			"substituteIf": "BOSS",
+			"substituteObject": {
+				"title": "Boss",
+				"description": "You're the boss",
+				"value": 0,
+				"type": "a",
+				"spacesForward": -1,
+			}
+		},
+		{
+			"id": 6,
+			"title": "Payday!",
+			"description": "Payday (with inflation!) Get $800",
+			"value": 800,
+			"type": "payday",
+			"spacesForward": -3,
+			"substituteIf": "NO IRA",
+			"substituteObject": {
+				"title": "NO IRA",
+				"description": "No inflation wage match",
+				"value": 0,
+				"type": "a",
+				"spacesForward": -1,
+			}
+		},
+		{
+			"id": 7,
+			"title": "It's not you, you won't be fired",
+			"description": "",
+			"value": 0,
+			"type": "a",
+			"spacesForward": -1,
+			"substituteIf": "",
+			"substituteObject": {}
+		},
+		{
+			"id": 8,
+			"title": "Profit losses",
+			"description": "The company decides they’ll have to cut someone’s pay to accommodate losses",
+			"value": 0,
+			"type": "contest",
+			"spacesForward": 0,
+			"substituteIf": "BOSS",
+			"substituteObject": {
+				"title": "Boss",
+				"description": "You're the boss",
+				"value": 0,
+				"type": "a",
+				"spacesForward": -1,
+			}
+		},
+		{
+			"id": 9,
+			"title": "It’s you, you’ll be fired. You now have FIRED checked",
+			"description": "",
+			"value": 1337,
+			"type": "a",
+			"spacesForward": -6,
+			"substituteIf": "",
+			"substituteObject": {}
+		},
+		{
+			"id": 10,
+			"title": "Yes the boss likes me",
+			"description": "",
+			"value": 0,
+			"type": "a",
+			"spacesForward": -5,
+			"substituteIf": "",
+			"substituteObject": {}
+		},
+		{
+			"id": 11,
+			"title": "Does the boss like you?",
+			"description": "Automatic win if you're the boss",
+			"value": 0,
+			"type": "contest",
+			"spacesForward": 0,
+			"substituteIf": "BOSS",
+			"substituteObject": {
+				"title": "Boss",
+				"description": "You're the boss",
+				"value": 0,
+				"type": "a",
+				"spacesForward": -1,
+			}
+		},
+		{
+			"id": 12,
+			"title": "No, the boss doesn't like me",
+			"description": "",
+			"value": 0,
+			"type": "a",
+			"spacesForward": -4,
+			"substituteIf": "",
+			"substituteObject": {}
+		},
+		{
+			"id": 13,
+			"title": "Wow!",
+			"description": "Wow! You’re such an important part of the team! We love you and feel like you’re family.
++$100",
+			"value": 100,
+			"type": "payday",
+			"spacesForward": -7,
+			"substituteIf": "",
+			"substituteObject": {}
+		},
+		{
+			"id": 14,
+			"title": "No, you don’t mess up at work",
+			"description": "",
+			"value": 0,
+			"type": "a",
+			"spacesForward": -8,
+			"substituteIf": "",
+			"substituteObject": {}
+		},
+		{
+			"id": 15,
+			"title": "Do you mess up at work",
+			"description": "",
+			"value": 0,
+			"type": "contest",
+			"spacesForward": 0,
+			"substituteIf": "",
+			"substituteObject": {}
+		},
+		{
+			"id": 16,
+			"title": "Yes, you do mess up at work",
+			"description": "",
+			"value": 0,
+			"type": "a",
+			"spacesForward": -5,
+			"substituteIf": "",
+			"substituteObject": {}
+		},
+		{
+			"id": 17,
+			"title": "Yes, we can get relevant resources",
+			"description": "",
+			"value": 0,
+			"type": "a",
+			"spacesForward": -4,
+			"substituteIf": "",
+			"substituteObject": {}
+		},
+		{
+			"id": 18,
+			"title": "Can we get the relevant resources",
+			"description": "",
+			"value": 0,
+			"type": "contest",
+			"spacesForward": 0,
+			"substituteIf": "",
+			"substituteObject": {}
+		},
+		{
+			"id": 19,
+			"title": "No, we can’t get relevant resources",
+			"description": "",
+			"value": 0,
+			"type": "a",
+			"spacesForward": -11,
+			"substituteIf": "",
+			"substituteObject": {}
+		},
+		{
+			"id": 20,
+			"title": "No, not important day",
+			"description": "",
+			"value": 0,
+			"type": "a",
+			"spacesForward": -5,
+			"substituteIf": "",
+			"substituteObject": {}
+		},
+		{
+			"id": 21,
+			"title": "Is it an  important day for the company today?",
+			"description": "",
+			"value": 0,
+			"type": "contest",
+			"spacesForward": 0,
+			"substituteIf": "",
+			"substituteObject": {}
+		},
+		{
+			"id": 22,
+			"title": "Yes, important day (riskier)",
+			"description": "",
+			"value": 0,
+			"type": "a",
+			"spacesForward": -4,
+			"substituteIf": "",
+			"substituteObject": {}
+		},
+		{
+			"id": 23,
+			"title": "Go to Work",
+			"description": "",
+			"value": 0,
+			"type": "a",
+			"spacesForward": -2,
+			"substituteIf": "",
+			"substituteObject": {}
+		},
+		{
+			"id": 24,
+			"title": "Begin Day",
+			"description": "Needs not met",
+			"value": 1000,
+			"type": "contest",
+			"spacesForward": 0,
+			"substituteIf": "HIRED",
+			"substituteObject": {
+				"title": "You have a job, responsibilities!",
+				"description": "",
+				"value": 0,
+				"type": "a",
+				"spacesForward": -1,
+			}
+		},
+		{
+			"id": 25,
+			"title": "",
+			"description": "",
+			"value": 0,
+			"type": "",
+			"spacesForward": 0,
+			"substituteIf": "",
+			"substituteObject": {}
+		},
+		{
+			"id": 26,
+			"title": "",
+			"description": "",
+			"value": 0,
+			"type": "",
+			"spacesForward": 0,
+			"substituteIf": "",
+			"substituteObject": {}
+		},
+		{
+			"id": 27,
+			"title": "",
+			"description": "",
+			"value": 0,
+			"type": "",
+			"spacesForward": 0,
+			"substituteIf": "",
+			"substituteObject": {}
+		},
+		{
+			"id": 28,
+			"title": "",
+			"description": "",
+			"value": 0,
+			"type": "",
+			"spacesForward": 0,
+			"substituteIf": "",
+			"substituteObject": {}
+		},
+		{
+			"id": 29,
+			"title": "",
+			"description": "",
+			"value": 0,
+			"type": "",
+			"spacesForward": 0,
+			"substituteIf": "",
+			"substituteObject": {}
+		},
+		{
+			"id": 30,
+			"title": "",
+			"description": "",
+			"value": 0,
+			"type": "",
+			"spacesForward": 0,
+			"substituteIf": "",
+			"substituteObject": {}
+		},
+		{
+			"id": 31,
+			"title": "",
+			"description": "",
+			"value": 0,
+			"type": "",
+			"spacesForward": 0,
+			"substituteIf": "",
+			"substituteObject": {}
+		},
+		{
+			"id": 32,
+			"title": "",
+			"description": "",
+			"value": 0,
+			"type": "",
+			"spacesForward": 0,
+			"substituteIf": "",
+			"substituteObject": {}
+		},
+		{
+			"id": 33,
+			"title": "",
+			"description": "",
+			"value": 0,
+			"type": "",
+			"spacesForward": 0,
+			"substituteIf": "",
+			"substituteObject": {}
+		},
+		{
+			"id": 34,
+			"title": "",
+			"description": "",
+			"value": 0,
+			"type": "",
+			"spacesForward": 0,
+			"substituteIf": "",
+			"substituteObject": {}
+		},
+		{
+			"id": 35,
+			"title": "",
+			"description": "",
+			"value": 0,
+			"type": "",
+			"spacesForward": 0,
+			"substituteIf": "",
+			"substituteObject": {}
+		},
+		{
+			"id": 36,
+			"title": "",
+			"description": "",
+			"value": 0,
+			"type": "",
+			"spacesForward": 0,
+			"substituteIf": "",
+			"substituteObject": {}
+		},
+		{
+			"id": 37,
+			"title": "",
+			"description": "",
+			"value": 0,
+			"type": "",
+			"spacesForward": 0,
+			"substituteIf": "",
+			"substituteObject": {}
+		},
+		{
+			"id": 38,
+			"title": "",
+			"description": "",
+			"value": 0,
+			"type": "",
+			"spacesForward": 0,
+			"substituteIf": "",
+			"substituteObject": {}
+		},
+		{
+			"id": 39,
+			"title": "",
+			"description": "",
+			"value": 0,
+			"type": "",
+			"spacesForward": 0,
+			"substituteIf": "",
+			"substituteObject": {}
+		},
+		{
+			"id": 40,
+			"title": "",
+			"description": "",
+			"value": 0,
+			"type": "",
+			"spacesForward": 0,
+			"substituteIf": "",
+			"substituteObject": {}
+		},
+		{
+			"id": 41,
+			"title": "",
+			"description": "",
+			"value": 0,
+			"type": "",
+			"spacesForward": 0,
+			"substituteIf": "",
+			"substituteObject": {}
+		},
+		{
+			"id": 42,
+			"title": "",
+			"description": "",
+			"value": 0,
+			"type": "",
+			"spacesForward": 0,
+			"substituteIf": "",
+			"substituteObject": {}
+		},
+		{
+			"id": 43,
+			"title": "",
+			"description": "",
+			"value": 0,
+			"type": "",
+			"spacesForward": 0,
+			"substituteIf": "",
+			"substituteObject": {}
+		},
+		{
+			"id": 44,
+			"title": "",
+			"description": "",
+			"value": 0,
+			"type": "",
+			"spacesForward": 0,
+			"substituteIf": "",
+			"substituteObject": {}
+		},
+		{
+			"id": 45,
+			"title": "",
+			"description": "",
+			"value": 0,
+			"type": "",
+			"spacesForward": 0,
+			"substituteIf": "",
+			"substituteObject": {}
+		},
+		{
+			"id": 46,
+			"title": "",
+			"description": "",
+			"value": 0,
+			"type": "",
+			"spacesForward": 0,
+			"substituteIf": "",
+			"substituteObject": {}
+		},
+		{
+			"id": 47,
+			"title": "",
+			"description": "",
+			"value": 0,
+			"type": "",
+			"spacesForward": 0,
+			"substituteIf": "",
+			"substituteObject": {}
+		},
+		{
+			"id": 48,
+			"title": "",
+			"description": "",
+			"value": 0,
+			"type": "",
+			"spacesForward": 0,
+			"substituteIf": "",
+			"substituteObject": {}
+		},
+		{
+			"id": 49,
+			"title": "",
+			"description": "",
+			"value": 0,
+			"type": "",
+			"spacesForward": 0,
+			"substituteIf": "",
+			"substituteObject": {}
+		},
+		{
+			"id": 50,
+			"title": "",
+			"description": "",
+			"value": 0,
+			"type": "",
+			"spacesForward": 0,
+			"substituteIf": "",
+			"substituteObject": {}
+		},
+		{
+			"id": 51,
+			"title": "",
+			"description": "",
+			"value": 0,
+			"type": "",
+			"spacesForward": 0,
+			"substituteIf": "",
+			"substituteObject": {}
+		},
+		{
+			"id": 52,
+			"title": "",
+			"description": "",
+			"value": 0,
+			"type": "",
+			"spacesForward": 0,
+			"substituteIf": "",
+			"substituteObject": {}
+		},
+		{
+			"id": 53,
+			"title": "",
+			"description": "",
+			"value": 0,
+			"type": "",
+			"spacesForward": 0,
+			"substituteIf": "",
+			"substituteObject": {}
+		},
+		{
+			"id": 54,
+			"title": "",
+			"description": "",
+			"value": 0,
+			"type": "",
+			"spacesForward": 0,
+			"substituteIf": "",
+			"substituteObject": {}
+		},
+		{
+			"id": 55,
+			"title": "",
+			"description": "",
+			"value": 0,
+			"type": "",
+			"spacesForward": 0,
+			"substituteIf": "",
+			"substituteObject": {}
+		},
+		{
+			"id": 56,
+			"title": "",
+			"description": "",
+			"value": 0,
+			"type": "",
+			"spacesForward": 0,
+			"substituteIf": "",
+			"substituteObject": {}
+		},
+		{
+			"id": 57,
+			"title": "",
+			"description": "",
+			"value": 0,
+			"type": "",
+			"spacesForward": 0,
+			"substituteIf": "",
+			"substituteObject": {}
+		},
+		{
+			"id": 58,
+			"title": "",
+			"description": "",
+			"value": 0,
+			"type": "",
+			"spacesForward": 0,
+			"substituteIf": "",
+			"substituteObject": {}
+		},
+		{
+			"id": 59,
+			"title": "",
+			"description": "",
+			"value": 0,
+			"type": "",
+			"spacesForward": 0,
+			"substituteIf": "",
+			"substituteObject": {}
+		},
+		{
+			"id": 60,
+			"title": "",
+			"description": "",
+			"value": 0,
+			"type": "",
+			"spacesForward": 0,
+			"substituteIf": "",
+			"substituteObject": {}
+		},
+		{
+			"id": 61,
+			"title": "",
+			"description": "",
+			"value": 0,
+			"type": "",
+			"spacesForward": 0,
+			"substituteIf": "",
+			"substituteObject": {}
+		},
+		{
+			"id": 62,
+			"title": "",
+			"description": "",
+			"value": 0,
+			"type": "",
+			"spacesForward": 0,
+			"substituteIf": "",
+			"substituteObject": {}
+		},
+		{
+			"id": 63,
+			"title": "",
+			"description": "",
+			"value": 0,
+			"type": "",
+			"spacesForward": 0,
+			"substituteIf": "",
+			"substituteObject": {}
+		},
+		{
+			"id": 64,
+			"title": "",
+			"description": "",
+			"value": 0,
+			"type": "",
+			"spacesForward": 0,
+			"substituteIf": "",
+			"substituteObject": {}
+		},
+		{
+			"id": 65,
+			"title": "",
+			"description": "",
+			"value": 0,
+			"type": "",
+			"spacesForward": 0,
+			"substituteIf": "",
+			"substituteObject": {}
+		},
+		{
+			"id": 66,
+			"title": "",
+			"description": "",
+			"value": 0,
+			"type": "",
+			"spacesForward": 0,
+			"substituteIf": "",
+			"substituteObject": {}
+		},
+		{
+			"id": 67,
+			"title": "",
+			"description": "",
+			"value": 0,
+			"type": "",
+			"spacesForward": 0,
+			"substituteIf": "",
+			"substituteObject": {}
+		},
+		{
+			"id": 68,
+			"title": "",
+			"description": "",
+			"value": 0,
+			"type": "",
+			"spacesForward": 0,
+			"substituteIf": "",
+			"substituteObject": {}
+		},
+		{
+			"id": 69,
+			"title": "",
+			"description": "",
+			"value": 0,
+			"type": "",
+			"spacesForward": 0,
+			"substituteIf": "",
+			"substituteObject": {}
+		},
+		{
+			"id": 70,
+			"title": "",
+			"description": "",
+			"value": 0,
+			"type": "",
+			"spacesForward": 0,
+			"substituteIf": "",
+			"substituteObject": {}
+		},
+		{
+			"id": 71,
+			"title": "",
+			"description": "",
+			"value": 0,
+			"type": "",
+			"spacesForward": 0,
+			"substituteIf": "",
+			"substituteObject": {}
+		},
+		{
+			"id": 72,
+			"title": "",
+			"description": "",
+			"value": 0,
+			"type": "",
+			"spacesForward": 0,
+			"substituteIf": "",
+			"substituteObject": {}
+		},
+		{
+			"id": 73,
+			"title": "",
+			"description": "",
+			"value": 0,
+			"type": "",
+			"spacesForward": 0,
+			"substituteIf": "",
+			"substituteObject": {}
+		},
+		{
+			"id": 74,
+			"title": "",
+			"description": "",
+			"value": 0,
+			"type": "",
+			"spacesForward": 0,
+			"substituteIf": "",
+			"substituteObject": {}
+		},
+		{
+			"id": 75,
+			"title": "",
+			"description": "",
+			"value": 0,
+			"type": "",
+			"spacesForward": 0,
+			"substituteIf": "",
+			"substituteObject": {}
+		},
+		{
+			"id": 76,
+			"title": "",
+			"description": "",
+			"value": 0,
+			"type": "",
+			"spacesForward": 0,
+			"substituteIf": "",
+			"substituteObject": {}
+		},
+		{
+			"id": 77,
+			"title": "",
+			"description": "",
+			"value": 0,
+			"type": "",
+			"spacesForward": 0,
+			"substituteIf": "",
+			"substituteObject": {}
+		},
+		{
+			"id": 78,
+			"title": "",
+			"description": "",
+			"value": 0,
+			"type": "",
+			"spacesForward": 0,
+			"substituteIf": "",
+			"substituteObject": {}
+		},
+		{
+			"id": 79,
+			"title": "",
+			"description": "",
+			"value": 0,
+			"type": "",
+			"spacesForward": 0,
+			"substituteIf": "",
+			"substituteObject": {}
+		},
+		{
+			"id": 80,
+			"title": "",
+			"description": "",
+			"value": 0,
+			"type": "",
+			"spacesForward": 0,
+			"substituteIf": "",
+			"substituteObject": {}
+		},
+		{
+			"id": 81,
+			"title": "",
+			"description": "",
+			"value": 0,
+			"type": "",
+			"spacesForward": 0,
+			"substituteIf": "",
+			"substituteObject": {}
+		},
+		{
+			"id": 82,
+			"title": "",
+			"description": "",
+			"value": 0,
+			"type": "",
+			"spacesForward": 0,
+			"substituteIf": "",
+			"substituteObject": {}
+		},
+		{
+			"id": 83,
+			"title": "",
+			"description": "",
+			"value": 0,
+			"type": "",
+			"spacesForward": 0,
+			"substituteIf": "",
+			"substituteObject": {}
+		},
+		{
+			"id": 84,
+			"title": "",
+			"description": "",
+			"value": 0,
+			"type": "",
+			"spacesForward": 0,
+			"substituteIf": "",
+			"substituteObject": {}
+		},
+		{
+			"id": 85,
+			"title": "",
+			"description": "",
+			"value": 0,
+			"type": "",
+			"spacesForward": 0,
+			"substituteIf": "",
+			"substituteObject": {}
+		},
+		{
+			"id": 86,
+			"title": "",
+			"description": "",
+			"value": 0,
+			"type": "",
+			"spacesForward": 0,
+			"substituteIf": "",
+			"substituteObject": {}
+		},
+		{
+			"id": 87,
+			"title": "",
+			"description": "",
+			"value": 0,
+			"type": "",
+			"spacesForward": 0,
+			"substituteIf": "",
+			"substituteObject": {}
+		},
+		{
+			"id": 88,
+			"title": "",
+			"description": "",
+			"value": 0,
+			"type": "",
+			"spacesForward": 0,
+			"substituteIf": "",
+			"substituteObject": {}
+		},
+		{
+			"id": 89,
+			"title": "",
+			"description": "",
+			"value": 0,
+			"type": "",
+			"spacesForward": 0,
+			"substituteIf": "",
+			"substituteObject": {}
+		},
+		{
+			"id": 90,
+			"title": "",
+			"description": "",
+			"value": 0,
+			"type": "",
+			"spacesForward": 0,
+			"substituteIf": "",
+			"substituteObject": {}
+		},
+		{
+			"id": 91,
+			"title": "",
+			"description": "",
+			"value": 0,
+			"type": "",
+			"spacesForward": 0,
+			"substituteIf": "",
+			"substituteObject": {}
+		},
+		{
+			"id": 92,
+			"title": "",
+			"description": "",
+			"value": 0,
+			"type": "",
+			"spacesForward": 0,
+			"substituteIf": "",
+			"substituteObject": {}
+		},
+		{
+			"id": 93,
+			"title": "",
+			"description": "",
+			"value": 0,
+			"type": "",
+			"spacesForward": 0,
+			"substituteIf": "",
+			"substituteObject": {}
+		},
+		{
+			"id": 94,
+			"title": "",
+			"description": "",
+			"value": 0,
+			"type": "",
+			"spacesForward": 0,
+			"substituteIf": "",
+			"substituteObject": {}
+		},
+		{
+			"id": 95,
+			"title": "",
+			"description": "",
+			"value": 0,
+			"type": "",
+			"spacesForward": 0,
+			"substituteIf": "",
+			"substituteObject": {}
+		},
+		{
+			"id": 96,
+			"title": "",
+			"description": "",
+			"value": 0,
+			"type": "",
+			"spacesForward": 0,
+			"substituteIf": "",
+			"substituteObject": {}
+		},
+		{
+			"id": 97,
+			"title": "",
+			"description": "",
+			"value": 0,
+			"type": "",
+			"spacesForward": 0,
+			"substituteIf": "",
+			"substituteObject": {}
 		}
-]
-	
+	]
 }
