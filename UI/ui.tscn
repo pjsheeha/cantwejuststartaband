@@ -69,17 +69,36 @@ offset_bottom = 617.0
 
 [node name="option1" type="Button" parent="Control2"]
 layout_mode = 2
-offset_left = 1051.0
-offset_top = 412.0
-offset_right = 1114.0
-offset_bottom = 484.0
+offset_left = 639.0
+offset_top = 323.0
+offset_right = 1145.0
+offset_bottom = 395.0
+
+[node name="win-position" type="RichTextLabel" parent="Control2/option1"]
+layout_mode = 0
+offset_left = 36.0
+offset_top = 22.0
+offset_right = 537.0
+offset_bottom = 94.0
+mouse_filter = 2
+text = "sdlkasldjsalkjdklajdkljakjddlkasjkdasldjaklsdjlskajdlkajsdlka"
 
 [node name="option2" type="Button" parent="Control2"]
 layout_mode = 2
-offset_left = 15.0
-offset_top = 432.0
-offset_right = 78.0
-offset_bottom = 504.0
+offset_left = 21.0
+offset_top = 312.0
+offset_right = 521.0
+offset_bottom = 384.0
+
+[node name="lose-position" type="RichTextLabel" parent="Control2/option2"]
+layout_mode = 0
+offset_left = 28.0
+offset_top = 15.0
+offset_right = 529.0
+offset_bottom = 87.0
+scale = Vector2(0.978934, 1)
+mouse_filter = 2
+text = "sdlkasldjsalkjdklajdkljakjddlkasjkdasldjaklsdjlskajdlkajsdlka"
 
 [node name="selected" type="RichTextLabel" parent="Control2"]
 layout_mode = 0
@@ -94,22 +113,6 @@ offset_left = 330.0
 offset_top = 410.0
 offset_right = 831.0
 offset_bottom = 482.0
-text = "sdlkasldjsalkjdklajdkljakjddlkasjkdasldjaklsdjlskajdlkajsdlka"
-
-[node name="win-position" type="RichTextLabel" parent="Control2"]
-layout_mode = 0
-offset_left = 666.0
-offset_top = 342.0
-offset_right = 1167.0
-offset_bottom = 414.0
-text = "sdlkasldjsalkjdklajdkljakjddlkasjkdasldjaklsdjlskajdlkajsdlka"
-
-[node name="lose-position" type="RichTextLabel" parent="Control2"]
-layout_mode = 0
-offset_left = 49.0
-offset_top = 327.0
-offset_right = 550.0
-offset_bottom = 399.0
 text = "sdlkasldjsalkjdklajdkljakjddlkasjkdasldjaklsdjlskajdlkajsdlka"
 
 [node name="results" type="RichTextLabel" parent="Control2"]

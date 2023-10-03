@@ -14,8 +14,8 @@ extends Control
 @onready var option1 = get_node("option1");
 @onready var option2 = get_node("option2");
 @onready var currentPos = get_node("position-label");
-@onready var winPosition = get_node("win-position");
-@onready var losePosition = get_node("lose-position");
+@onready var winPosition = get_node("option1/win-position");
+@onready var losePosition = get_node("option2/lose-position");
 var dice;
 var rng;
 var selected = '';
@@ -52,26 +52,35 @@ func _ready():
 	option1.pressed.connect(self._button_pressed_advance.bind(1))
 	option2.pressed.connect(self._button_pressed_advance.bind(2))
 	for die in dice :
-
 		die.pressed.connect( self._button_pressed_die_selected.bind(dice.find(die)))
 	yourdie.pressed.connect(self._button_pressed_yourdie_selected)
 	yourdie.disabled = true
 	json_data = load_json_file(json_scene)
 	print(json_data['stages'][0]['description'])
+	attributes.append('HIRED');
+	setupAll();
+	initialRoll();
+	
 	pass # Replace with function body.
 
+func initialRoll():
+	roll_daily.disabled = false;
+	for die in dice :
+		die.disabled = true;
+	option1.disabled = true;
+	option2.disabled = true;
+
 func setupAll():
-	for d in dieDailyArchive:
-		dice[d].disabled = true;
-	var json_stage = json_data['stages'][current_json_id];
+	resultsText.text = '';
+	whoWinsText.text = ''
+	yourdie.text = ''
+	selectedText.text = '';
+	json_stage = json_data['stages'][current_json_id];
 
 	for a in attributes:
 		if (a == json_data['stages'][current_json_id]['substituteIf']):
 			json_stage = json_data['stages'][current_json_id]['substituteObject'];
-		
-	for a in attributes:
-		if (a == json_data['stages'][current_json_id]['substituteIf']):
-			json_stage[current_json_id]['substituteObject'];
+
 	if (json_stage["value"] == 1337):	##1337 is FIRED
 		if (attributes.count('FIRED')==0):
 			attributes.append('FIRED');
@@ -112,41 +121,83 @@ func setupAll():
 	elif (json_stage["value"] == 9696):	#9696 is remove INFLATED
 		if (attributes.count('INFLATED')>0):
 			attributes.remove_at(attributes.find('INFLATED'));
-	else:
-		money += json_stage["value"]
+	#else:
+	#	money += json_stage["value"]
 	currentPos.text = json_stage['title'];
+	if (json_stage["id"] == 24):
+		if (!attributes.has("NEEDS_NOT_MET")):
+			attributes.remove_at(attributes.find('NEEDS_NOT_MET'));
+		else:
+			var opop = 0
+			var goalToDelete = randi() % dice.length;
+			for d in dice:
+				if (goalToDelete == opop):
+					dice.remove_at(attributes.find(d));
+				opop += 1;
+
+		for v in diceVals:
+			v =0
+		for o in dice:
+			o.text = ''
+		initialRoll();
+	deciding_die()
+	for d in dieDailyArchive:
+		dice[d].disabled = true
+
+#	pass
+	
+func deciding_die():
 	var winId = 0;
 	var loseId = 0;
 	var win = ''
 	var lose = ''
 	if (json_stage['type'] == 'contest'):
+		for p in dice:
+			p.disabled = false
 		winId = current_json_id + direction;
-		loseId= current_json_id + direction;
+		loseId= current_json_id + -1*direction;
+		option1.disabled = true;
+		option2.disabled = true;
 		win = json_data['stages'][winId]['title']
 		lose = json_data['stages'][loseId]['title']
-	elif (json_stage['type']== 'a'):
+	else:
+		for piu in dice:
+			print('oko')
+			piu.disabled = true
+
 		if (json_stage['spacesForward']>0):
 			winId= current_json_id + json_stage['spacesForward'];
+			option2.disabled = true;
+			option1.disabled = false;
 			win = json_data['stages'][winId]['title']
 		elif (json_stage['spacesForward']<0):
 			loseId= current_json_id + json_stage['spacesForward'];
 			lose = json_data['stages'][loseId]['title']
+			option2.disabled = false;
+			option1.disabled = true;
 	winPosition.text = win
 	losePosition.text = lose
-
-#	pass
-	
-
 func _button_pressed_advance(opt):
-	dieDailyArchive.append(dieIndex);
 
+	print(json_stage)
 	if (json_stage["type"] == "a"):
-		if (opt == 1):
-			current_json_id = direction;
-		elif (opt == 2):
-			current_json_id = -1*direction;
+		current_json_id += json_stage["spacesForward"];
+	elif (json_stage["type"] == "payday"):
+		money += json_stage["value"];
+		current_json_id += json_stage["spacesForward"];
+	elif (json_stage["type"] == "rollpaydayboss"):
+		money += json_stage["value"]+ ((randi() % 6)+1);
+		current_json_id += json_stage["spacesForward"];
+	elif (json_stage["type"] == "teleport"):
+		current_json_id = json_stage["spacesForward"];
 	elif (json_stage["type"] == 'contest'):
-		current_json_id = direction*json_stage["spacesForward"];
+		
+		dieDailyArchive.append(dieIndex);
+		if (opt == 1):
+			current_json_id += (direction);
+		elif (opt == 2):
+			current_json_id += -1*direction;
+
 	setupAll();
 
 
@@ -170,6 +221,29 @@ func _button_pressed_yourdie_selected():
 		yourdie.text = str(rol+1);
 		
 		yourdieselected = str(rol+1);
+		if (yourdieselected != ''):
+				if dieVal == 6 or dieVal == 1:
+					resultsText.text = 'doesnt matter';
+				else:
+					resultsText.text = 'your rolled die is ' + yourdieselected+ '.';
+					yourdie.disabled = false
+					whoWinsText.text = ''
+					if yourdieVal < dieVal:
+						
+						you_rolled_higher = false;
+						whoWinsText.text = 'Your roll of ' + str(yourdieVal) + ' was less than your competitions which was ' + str(dieVal) +'. You win!'
+					elif yourdieVal == dieVal:
+						you_rolled_higher = true;
+						print('asasa',str(yourdieVal));
+						whoWinsText.text = 'Your roll of ' + str(yourdieVal) + ' was equal to your competitions which was ' + str(dieVal) +'. You lose.'
+					else:
+						you_rolled_higher = true;
+						whoWinsText.text = "Your roll of " + str(yourdieVal) + ' was higher than your competitors roll which was ' + str(dieVal) + '. You lose.'
+					for die in dice :
+						die.disabled = true;
+					yourdie.disabled = true
+
+				_which_option()
 
 
 func _button_pressed_die_selected(di):
@@ -183,39 +257,6 @@ func _button_pressed_die_selected(di):
 		dieIndex = di;
 		print('index', dieIndex)
 		selected = ''
-	
-	pass
-
-func _button_pressed_click_me():
-
-	if (roll_daily_rolled == false):
-		for die in dice :
-
-			var rol = randi() % 6;
-			die.text = str(rol+1);
-			diceVals[dice.find(die)] = str(rol+1);
-			roll_daily.disabled = true;
-		roll_daily_rolled = true;
-
-
-	pass
-	
-func _which_option(option):
-	if (option == 1):
-		option1.disabled = true;
-		option2.disabled = false;
-	elif (option == 2):
-		option1.disabled = false;
-		option2.disabled = true;
-	pass
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	if (yourdieselected != ''):
-		if dieVal == 6 or dieVal == 1:
-			resultsText.text = 'doesnt matter';
-		else:
-			resultsText.text = 'your rolled die is ' + yourdieselected+ '.';
-	
 	if (selected != ''):
 		selectedText.text = 'your selected die is '+selected+ '.';
 		yourdie.disabled = false
@@ -226,32 +267,53 @@ func _process(delta):
 			
 			whoWinsText.text = 'You automatically pass this check'
 			yourdie.disabled = true
+			you_rolled_higher = false;
+			_which_option()
 		elif (dieVal ==1):
 			whoWinsText.text = 'You automatically fail this check'
 			yourdie.disabled = true
+			you_rolled_higher = true;
+			_which_option()
 		else:
-			yourdie.disabled = false
-			whoWinsText.text = ''
-			if (yourdieselected != ''):
+			option1.disabled = true;
+			option1.disabled = true;
 
-				if yourdieVal < dieVal:
-					
-					you_rolled_higher = false;
-					
-					print('asasa',str(yourdieVal));
-					whoWinsText.text = 'Your roll of ' + str(yourdieVal) + ' was less than your competitions which was ' + str(dieVal) +'. You win!'
-				elif yourdieVal == dieVal:
-					you_rolled_higher = true;
-					print('asasa',str(yourdieVal));
-					whoWinsText.text = 'Your roll of ' + str(yourdieVal) + ' was equal to your competitions which was ' + str(dieVal) +'. You lose.'
-				else:
-					you_rolled_higher = true;
-					whoWinsText.text = "Your roll of " + str(yourdieVal) + ' was higher than your competitors roll which was ' + str(dieVal) + '. You lose.'
-				for die in dice :
-					die.disabled = true;
-				yourdie.disabled = true
+			
+	pass
 
-	else:
-		resultsText.text = '';
-		whoWinsText.text = ''
+func _button_pressed_click_me():
+
+	if (roll_daily_rolled == false):
+		for die in dice :
+			if (json_stage["type"] == "a"):
+				die.disabled = true
+				
+			elif (json_stage["type"] == "contest"):
+				die.disabled = false
+			else:
+				die.disabled = true
+			var rol = randi() % 6;
+			die.text = str(rol+1);
+			diceVals[dice.find(die)] = str(rol+1);
+
+			roll_daily.disabled = true;
+		roll_daily_rolled = true;
+	deciding_die();
+
+
+	pass
+	
+func _which_option():
+	if (you_rolled_higher == false):
+		option1.disabled = false;
+		option2.disabled = true;
+	elif (you_rolled_higher == true):
+		option1.disabled = true;
+		option2.disabled = false;
+	pass
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	
+	
+
 	pass

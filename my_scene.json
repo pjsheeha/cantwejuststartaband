@@ -5,7 +5,7 @@
 			"title": "Fought in court successfully!",
 			"description": "You were able to fight the violation in court.",
 			"value": 0,
-			"type": "a",
+			"type": "teleport",
 			"spacesForward": 81,
 			"substituteIf": "",
 			"substituteObject": {}
@@ -171,7 +171,7 @@
 			"description": "",
 			"value": 0,
 			"type": "a",
-			"spacesForward": -8,
+			"spacesForward": -1,
 			"substituteIf": "",
 			"substituteObject": {}
 		},
