@@ -39,7 +39,9 @@ var spaces_to_go = 0;
 var substituting = false;
 var money = 0;
 var direction = -1;
-
+var automatic_status = 'none';
+var temp_money = 0;
+var inflation_value = 0;
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	roll_daily.text = "Click me"
@@ -75,6 +77,7 @@ func setupAll():
 	whoWinsText.text = ''
 	yourdie.text = ''
 	selectedText.text = '';
+
 	json_stage = json_data['stages'][current_json_id];
 
 	for a in attributes:
@@ -96,12 +99,19 @@ func setupAll():
 	elif (json_stage["value"] == 1594): 	#1594 is HAS_LOAN
 		if (attributes.count('HAS_LOAN')==0):
 			attributes.append('HAS_LOAN');
-	elif (json_stage["value"] == 6660):	#6660 is BOSS
-		if (attributes.count('BOSS')==0):
-			attributes.append('BOSS');
+	elif (json_stage["value"] == 9164): 	#9164 is HAS_NO_BAND_NAME
+		if (attributes.count('HAS_BAND_NAME')==0):
+			attributes.append('HAS_BAND_NAME');
+
+		
 	elif (json_stage["value"] == 1212):	#1212 is IRA
 		if (attributes.count('IRA')==0):
 			attributes.append('IRA');
+	elif (json_stage["value"] == 23580):	#23580 is HAS_INSTRUMENTS
+		if (attributes.count('HAS_INSTRUMENTS')==0):
+			attributes.append('HAS_INSTRUMENTS');
+
+
 
 	elif (json_stage["value"] == 4424):	#4424 is remove FIRED
 		if (attributes.count('FIRED')>0):
@@ -109,9 +119,14 @@ func setupAll():
 	elif (json_stage["value"] == 8032):	#8032 is remove HAS_BAND
 		if (attributes.count('HAS_BAND')>0):
 			attributes.remove_at(attributes.find('HAS_BAND'));
+		if (attributes.count('HAS_INSTRUMENTS')>0):
+			attributes.remove_at(attributes.find('HAS_INSTRUMENTS'));
+		if (attributes.count('HAS_BAND_NAME')>0):
+			attributes.remove_at(attributes.find('HAS_BAND_NAME'));
 	elif (json_stage["value"]== 1201):	#1201 is remove HAS_LOAN
 		if (attributes.count('HAS_LOAN')>0):
 			attributes.remove_at(attributes.find('HAS_LOAN'));
+
 	elif (json_stage["value"] == 8080):	#8080 is remove IRA
 		if (attributes.count('IRA')>0):
 			attributes.remove_at(attributes.find('IRA'));
@@ -121,10 +136,59 @@ func setupAll():
 	elif (json_stage["value"] == 9696):	#9696 is remove INFLATED
 		if (attributes.count('INFLATED')>0):
 			attributes.remove_at(attributes.find('INFLATED'));
-	#else:
-	#	money += json_stage["value"]
+	elif (json_stage["value"] == 6115): #HAS_INSTRUMENT
+		if (attributes.count('HAS_INSTRUMENTS')==0):
+			inflation_value_result(500)
+			if money > 500+inflation_value:
+				temp_money = 500+inflation_value
+				automatic_status = "none"	
+			else:
+				automatic_status = "false"
+		else:
+			automatic_status = "true"
+
+	
+	elif (json_stage["value"] == 8055): #BOSS
+		if (attributes.count('BOSS')==0):
+			inflation_value_result(10000)
+			if money > 10000+inflation_value:
+				temp_money = 10000+inflation_value
+				automatic_status = "none"
+				if (attributes.count('BOSS')==0):
+					attributes.append('BOSS');	
+			else:
+				automatic_status = "false"
+		else:
+			automatic_status = "true"
+	elif (json_stage["value"] == 30763): #CONCERT
+		inflation_value_result(5000)
+		if money > 5000+inflation_value:
+			temp_money = 5000+inflation_value
+			automatic_status = "none"	
+		else:
+			automatic_status = "false"
+	elif (json_stage["value"] == 2244): #Payday
+		inflation_value_result(600)
+		var bonus_roll = 0
+		if (attributes.count('BOSS')==0):
+			bonus_roll = 100*(randi() % dice.length)
+		if money > 600+inflation_value+bonus_roll:
+			temp_money = 600+inflation_value+bonus_roll
+			automatic_status = "none"	
+		else:
+			automatic_status = "false"
+
+
+	
+	else:
+		money += json_stage["value"]
 	currentPos.text = json_stage['title'];
+	if (json_stage["id"] ==23):
+		direction = -1
+	if (json_stage["id"] ==25):
+		direction = 1
 	if (json_stage["id"] == 24):
+		
 		if (!attributes.has("NEEDS_NOT_MET")):
 			attributes.remove_at(attributes.find('NEEDS_NOT_MET'));
 		else:
@@ -143,9 +207,29 @@ func setupAll():
 	deciding_die()
 	for d in dieDailyArchive:
 		dice[d].disabled = true
+	if money < 5000:
+		if (attributes.count('NOT_HAS_5000')==0):
+			attributes.append('NOT_HAS_5000');
 
+	if money >= 5000:
+		if (attributes.count('NOT_HAS_5000')>0):
+			attributes.remove_at(attributes.find('NOT_HAS_5000'));
+			
+
+			
+	#		
+	#automatic_status = "none"
 #	pass
-	
+
+func inflation_value_result(temp_money_val):		
+	if (attributes.count('INFLATED')>0):
+		inflation_value = (temp_money_val*.3)+20
+
+		if (attributes.count('IRA')>0):
+			inflation_value = 0
+		else: 
+			inflation_value = 0
+
 func deciding_die():
 	var winId = 0;
 	var loseId = 0;
@@ -190,6 +274,7 @@ func _button_pressed_advance(opt):
 		current_json_id += json_stage["spacesForward"];
 	elif (json_stage["type"] == "teleport"):
 		current_json_id = json_stage["spacesForward"];
+
 	elif (json_stage["type"] == 'contest'):
 		
 		dieDailyArchive.append(dieIndex);
@@ -197,7 +282,40 @@ func _button_pressed_advance(opt):
 			current_json_id += (direction);
 		elif (opt == 2):
 			current_json_id += -1*direction;
+	if (json_stage["type"] == 'payout'):
+		if (automatic_status == 'true'):
 
+			if (json_stage["spacesForward"]==0):
+				current_json_id += 1*direction;
+			else:
+				current_json_id += json_stage["spacesForward"]
+		elif (automatic_status == 'false'):
+			if (json_stage["spacesForward"]==0):
+				current_json_id += -1*direction;
+			else:
+				current_json_id += json_stage["spacesForward"]
+		if (money > temp_money):
+			if (opt == 1):
+				money -= temp_money
+				if (json_stage["spacesForward"]==0):
+					current_json_id += 1*direction;
+				else:
+					current_json_id += json_stage["spacesForward"]
+			elif (opt == 2):
+				
+				if (json_stage["spacesForward"]==0):
+						current_json_id += -1*direction;
+					else:
+						current_json_id += json_stage["spacesForward"]
+		
+			
+		dieDailyArchive.append(dieIndex);
+		if (opt == 1):
+			current_json_id += (direction);
+		elif (opt == 2):
+			current_json_id += -1*direction;
+	else:
+		temp_money = 0
 	setupAll();
 
 
