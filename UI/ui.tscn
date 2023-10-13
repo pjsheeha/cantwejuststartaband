@@ -159,8 +159,8 @@ text = "fans: "
 [node name="attributes" type="Label" parent="Control2"]
 layout_mode = 1
 anchors_preset = -1
-offset_left = 1013.0
+offset_left = 912.0
 offset_top = 22.0
 offset_right = 1129.0
-offset_bottom = 242.0
+offset_bottom = 307.0
 text = "attributes: "

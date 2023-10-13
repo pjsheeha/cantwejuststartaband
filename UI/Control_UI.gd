@@ -19,6 +19,8 @@ extends Control
 @onready var currentPos = get_node("position-label");
 @onready var winPosition = get_node("option1/win-position");
 @onready var losePosition = get_node("option2/lose-position");
+
+var temp_attr = '';
 var dice;
 var rng;
 var selected = '';
@@ -94,8 +96,9 @@ func setupAll():
 			if (attributes.count('HIRED')>0):
 				attributes.remove_at(attributes.find('HIRED'));
 	elif (json_stage["value"] == 1000):
-		if (attributes.count('NEEDS_NOT_MET')==0):	#1000 is NEEDS_NOT_MET
-			attributes.append('NEEDS_NOT_MET');
+		#if (attributes.count('NEEDS_NOT_MET')==0):	#1000 is NEEDS_NOT_MET
+			#attributes.append('NEEDS_NOT_MET');
+		print('Hello')
 	elif (json_stage["value"] == 7430): 	#7430 is HAS_BAND
 		if (attributes.count('HAS_BAND')==0):
 			attributes.append('HAS_BAND');
@@ -158,6 +161,7 @@ func setupAll():
 				option2.disabled = false
 		else:
 			automatic_status = "true"
+		temp_attr = 'HAS_INSTRUMENTS'
 
 	
 	elif (json_stage["value"] == 8055): #BOSS
@@ -176,6 +180,7 @@ func setupAll():
 				option2.disabled = false
 		else:
 			automatic_status = "true"
+		temp_attr = 'BOSS'
 	elif (json_stage["value"] == 30763): #CONCERT
 		inflation_value_result(5000)
 		if money > 5000+inflation_value:
@@ -187,6 +192,7 @@ func setupAll():
 			option1.disabled = true
 			option2.disabled = false
 			automatic_status = "false"
+		temp_attr = 'CONCERT'
 	elif (json_stage["value"] == 2244): #NEEDS_MET
 		inflation_value_result(600)
 
@@ -194,8 +200,7 @@ func setupAll():
 		if money >= 600+inflation_value:
 			print('opt1disabledfalse')
 			temp_money = 600+inflation_value
-			if (attributes.count('NEEDS_MET')==0):
-				attributes.append('NEEDS_MET');	
+
 			option1.disabled = false
 			option2.disabled = false
 			automatic_status = "true"	
@@ -204,30 +209,11 @@ func setupAll():
 			option1.disabled = true
 			option2.disabled = false
 			automatic_status = "false"
+		temp_attr = 'NEEDS_MET'
 
 	currentPos.text = json_stage['title'];
 
-	if (json_stage["myId"] ==23):
-		direction = -1
-	if (json_stage["myId"] >25):
-		direction = 1
-	if (json_stage["myId"] == 24):
-		
-		if (attributes.has("NEEDS_NOT_MET")):
-			attributes.remove_at(attributes.find('NEEDS_NOT_MET'));
-		else:
-			var opop = 0
-			var goalToDelete = randi() % dice.size();
-			for d in dice.size():
-				if (goalToDelete == opop):
-					dice.remove_at(attributes.find(dice[d]));
-				opop += 1;
-			
-		diceVals = [0,0,0,0,0,0]
-		for o in dice:
-			o.text = ''
-		dieDailyArchive.clear();
-		initialRoll();
+
 
 	print(dieDailyArchive);
 	for d in dieDailyArchive:
@@ -250,12 +236,28 @@ func setupAll():
 	fansLabel.text = "fans: "+str(fans);
 	moneyLabel.text = "money: "+ str(money);
 	daysLabel.text = "days: "+str(days);
-	if (dieDailyArchive.size() >= 6):
-		current_json_id = 24;
-		days +=1;
-		dieDailyArchive.clear();
-		roll_daily_rolled = false
 
+	if (json_stage["myId"] ==23):
+		direction = -1
+	if (json_stage["myId"] >25):
+		direction = 1
+	if (json_stage["myId"] == 24):
+		roll_daily_rolled = false
+		if (attributes.has("NEEDS_MET")):
+			attributes.remove_at(attributes.find('NEEDS_MET'));
+		else:
+			var opop = 0
+			var goalToDelete = randi() % dice.size();
+			for d in dice.size():
+				if (goalToDelete == opop):
+					dice.remove_at(attributes.find(dice[d]));
+				opop += 1;
+			
+		diceVals = [0,0,0,0,0,0]
+		for o in dice:
+			o.text = ''
+		dieDailyArchive.clear();
+		initialRoll();
 	#		
 	#automatic_status = "none"
 #	pass
@@ -347,24 +349,32 @@ func _button_pressed_advance(opt):
 		print('dio', dieIndex)
 		dieDailyArchive.append(dieIndex);
 		if (opt == 1):
+
 			current_json_id += (direction);
 		elif (opt == 2):
 			current_json_id += -1*direction;
 	if (json_stage["type"] == 'payout'):
 		print(automatic_status);
-		if (automatic_status == 'true'):
+		if (opt == 1):
 			money -= temp_money
-			if (json_stage["spacesForward"]==0):
-				current_json_id += 1*direction;
-			else:
-				current_json_id += json_stage["spacesForward"]
+			if (attributes.count(temp_attr)==0):
+				attributes.append(temp_attr);	
+			current_json_id += direction;
+		elif (opt == 2):
+			current_json_id += -1*direction;
+		#if (automatic_status == 'true'):
+
+		#	if (json_stage["spacesForward"]==0):
+		#		current_json_id += 1*direction;
+		#	else:
+		#		current_json_id += json_stage["spacesForward"]
 				
-		elif (automatic_status == 'false'):
-			print(current_json_id -(1*direction))
-			if (json_stage["spacesForward"]==0):
-				current_json_id += -1*direction;
-			else:
-				current_json_id += json_stage["spacesForward"]
+		#elif (automatic_status == 'false'):
+		#	print(current_json_id -(1*direction))
+		#	if (json_stage["spacesForward"]==0):
+		#		current_json_id += -1*direction;
+		#	else:
+		#		current_json_id += json_stage["spacesForward"]
 		
 		#if (money >= temp_money):
 		#	if (opt == 1):
@@ -389,7 +399,11 @@ func _button_pressed_advance(opt):
 		
 
 
-
+	if (dieDailyArchive.size() >= 6):
+		current_json_id = 24;
+		days +=1;
+		dieDailyArchive.clear();
+		roll_daily_rolled = false
 	setupAll();
 
 
@@ -439,7 +453,7 @@ func _button_pressed_yourdie_selected():
 
 
 func _button_pressed_die_selected(di):
-	dieIndex = di;
+
 	if (dice[di].text != selected or selected == ''):
 		dieVal = int(diceVals[di])
 		dieIndex = di;
@@ -449,6 +463,10 @@ func _button_pressed_die_selected(di):
 		dieIndex = -1;
 	
 		selected = ''
+	elif ( dieIndex != di):
+		dieIndex = di;
+		dieVal = int(diceVals[di])
+		selected = str(diceVals[di])
 	if (selected != ''):
 		selectedText.text = 'your selected die is '+selected+ '.';
 		yourdie.disabled = false
