@@ -128,3 +128,39 @@ offset_left = 624.0
 offset_top = 18.0
 offset_right = 840.0
 offset_bottom = 90.0
+
+[node name="days" type="Label" parent="Control2"]
+layout_mode = 1
+anchors_preset = -1
+offset_left = 26.0
+offset_top = 53.0
+offset_right = 142.0
+offset_bottom = 79.0
+text = "days: "
+
+[node name="money" type="Label" parent="Control2"]
+layout_mode = 1
+anchors_preset = -1
+offset_left = 26.0
+offset_top = 99.0
+offset_right = 142.0
+offset_bottom = 125.0
+text = "money: "
+
+[node name="fans" type="Label" parent="Control2"]
+layout_mode = 1
+anchors_preset = -1
+offset_left = 27.0
+offset_top = 137.0
+offset_right = 143.0
+offset_bottom = 163.0
+text = "fans: "
+
+[node name="attributes" type="Label" parent="Control2"]
+layout_mode = 1
+anchors_preset = -1
+offset_left = 1013.0
+offset_top = 22.0
+offset_right = 1129.0
+offset_bottom = 242.0
+text = "attributes: "

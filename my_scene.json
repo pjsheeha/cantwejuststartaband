@@ -1,18 +1,18 @@
 {
 	"stages": [
 		{
-			"id": 0,
+			"myId": 0,
 			"title": "Fought in court successfully!",
 			"description": "You were able to fight the violation in court.",
 			"value": 0,
 			"type": "teleport",
-			"spacesForward": 81,
+			"spacesForward": 77,
 			"substituteIf": "",
 			"substituteObject": {}
 		},
 		{
-			"id": 1,
-			"title": "CONTEST",
+			"myId": 1,
+			"title": "Get fined for a parking violation",
 			"description": "Get fined for a parking violation",
 			"value": 0,
 			"type": "contest",
@@ -21,17 +21,17 @@
 			"substituteObject": {}
 		},
 		{
-			"id": 2,
+			"myId": 2,
 			"title": "Lose $100",
 			"description": "",
-			"value": 0,
-			"type": "a",
-			"spacesForward": 79,
+			"value": -100,
+			"type": "payday",
+			"spacesForward": 75,
 			"substituteIf": "",
 			"substituteObject": {}
 		},
 		{
-			"id": 3,
+			"myId": 3,
 			"title": "Commute back home",
 			"description": "",
 			"value": 0,
@@ -41,7 +41,7 @@
 			"substituteObject": {}
 		},
 		{
-			"id": 4,
+			"myId": 4,
 			"title": "Roll and multiply by $100, add to $700",
 			"description": "",
 			"value": 700,
@@ -51,7 +51,7 @@
 			"substituteObject": {}
 		},
 		{
-			"id": 5,
+			"myId": 5,
 			"title": "Payday!",
 			"description": "Get $700",
 			"value": 700,
@@ -59,6 +59,7 @@
 			"spacesForward": -2,
 			"substituteIf": "BOSS",
 			"substituteObject": {
+				"myId": 5,
 				"title": "Boss",
 				"description": "You're the boss",
 				"value": 0,
@@ -67,23 +68,25 @@
 			}
 		},
 		{
-			"id": 6,
-			"title": "Payday!",
-			"description": "Payday (with inflation!) Get $800",
-			"value": 800,
-			"type": "payday",
-			"spacesForward": -3,
-			"substituteIf": "NO IRA",
+			"myId": 6,
+			"title": "NO IRA",
+			"description": "No inflation wage match",
+			"value": 0,
+			"type": "a",
+			"spacesForward": -1,
+			"substituteIf": "IRA",
 			"substituteObject": {
-				"title": "NO IRA",
-				"description": "No inflation wage match",
-				"value": 0,
-				"type": "a",
-				"spacesForward": -1,
+				"myId": 6,
+				"title": "Payday!",
+				"description": "Payday (with inflation!) Get $800",
+				"value": 800,
+				"type": "payday",
+				"spacesForward": -3,
+				
 			}
 		},
 		{
-			"id": 7,
+			"myId": 7,
 			"title": "It's not you, you won't be fired",
 			"description": "",
 			"value": 0,
@@ -93,14 +96,16 @@
 			"substituteObject": {}
 		},
 		{
-			"id": 8,
+			"myId": 8,
 			"title": "Profit losses",
-			"description": "The company decides they’ll have to cut someone’s pay to accommodate losses",
+			"description": "The company decmyIdes they’ll have to cut someone’s pay to accommodate losses",
 			"value": 0,
 			"type": "contest",
 			"spacesForward": 0,
 			"substituteIf": "BOSS",
 			"substituteObject": {
+				"myId": 8,
+
 				"title": "Boss",
 				"description": "You're the boss",
 				"value": 0,
@@ -109,7 +114,7 @@
 			}
 		},
 		{
-			"id": 9,
+			"myId": 9,
 			"title": "It’s you, you’ll be fired. You now have FIRED checked",
 			"description": "",
 			"value": 1337,
@@ -119,7 +124,7 @@
 			"substituteObject": {}
 		},
 		{
-			"id": 10,
+			"myId": 10,
 			"title": "Yes the boss likes me",
 			"description": "",
 			"value": 0,
@@ -129,7 +134,7 @@
 			"substituteObject": {}
 		},
 		{
-			"id": 11,
+			"myId": 11,
 			"title": "Does the boss like you?",
 			"description": "Automatic win if you're the boss",
 			"value": 0,
@@ -137,6 +142,8 @@
 			"spacesForward": 0,
 			"substituteIf": "BOSS",
 			"substituteObject": {
+				"myId": 11,
+
 				"title": "Boss",
 				"description": "You're the boss",
 				"value": 0,
@@ -145,7 +152,7 @@
 			}
 		},
 		{
-			"id": 12,
+			"myId": 12,
 			"title": "No, the boss doesn't like me",
 			"description": "",
 			"value": 0,
@@ -155,8 +162,9 @@
 			"substituteObject": {}
 		},
 		{
-			"id": 13,
-			"title": "Wow!",
+			"myId": 13,
+			"title": "Wow! You’re such an important part of the team! We love you and feel like you’re family.
++$100!",
 			"description": "Wow! You’re such an important part of the team! We love you and feel like you’re family.
 +$100",
 			"value": 100,
@@ -166,17 +174,17 @@
 			"substituteObject": {}
 		},
 		{
-			"id": 14,
+			"myId": 14,
 			"title": "No, you don’t mess up at work",
 			"description": "",
 			"value": 0,
 			"type": "a",
-			"spacesForward": -1,
+			"spacesForward": -8,
 			"substituteIf": "",
 			"substituteObject": {}
 		},
 		{
-			"id": 15,
+			"myId": 15,
 			"title": "Do you mess up at work",
 			"description": "",
 			"value": 0,
@@ -186,7 +194,7 @@
 			"substituteObject": {}
 		},
 		{
-			"id": 16,
+			"myId": 16,
 			"title": "Yes, you do mess up at work",
 			"description": "",
 			"value": 0,
@@ -196,7 +204,7 @@
 			"substituteObject": {}
 		},
 		{
-			"id": 17,
+			"myId": 17,
 			"title": "Yes, we can get relevant resources",
 			"description": "",
 			"value": 0,
@@ -206,7 +214,7 @@
 			"substituteObject": {}
 		},
 		{
-			"id": 18,
+			"myId": 18,
 			"title": "Can we get the relevant resources",
 			"description": "",
 			"value": 0,
@@ -216,7 +224,7 @@
 			"substituteObject": {}
 		},
 		{
-			"id": 19,
+			"myId": 19,
 			"title": "No, we can’t get relevant resources",
 			"description": "",
 			"value": 0,
@@ -226,7 +234,7 @@
 			"substituteObject": {}
 		},
 		{
-			"id": 20,
+			"myId": 20,
 			"title": "No, not important day",
 			"description": "",
 			"value": 0,
@@ -236,7 +244,7 @@
 			"substituteObject": {}
 		},
 		{
-			"id": 21,
+			"myId": 21,
 			"title": "Is it an  important day for the company today?",
 			"description": "",
 			"value": 0,
@@ -246,7 +254,7 @@
 			"substituteObject": {}
 		},
 		{
-			"id": 22,
+			"myId": 22,
 			"title": "Yes, important day (riskier)",
 			"description": "",
 			"value": 0,
@@ -256,7 +264,7 @@
 			"substituteObject": {}
 		},
 		{
-			"id": 23,
+			"myId": 23,
 			"title": "Go to Work",
 			"description": "",
 			"value": 0,
@@ -266,7 +274,7 @@
 			"substituteObject": {}
 		},
 		{
-			"id": 24,
+			"myId": 24,
 			"title": "Begin Day",
 			"description": "Needs not met",
 			"value": 1000,
@@ -274,6 +282,8 @@
 			"spacesForward": 0,
 			"substituteIf": "HIRED",
 			"substituteObject": {
+				"myId": 24,
+
 				"title": "You have a job, responsibilities!",
 				"description": "",
 				"value": 0,
@@ -282,7 +292,7 @@
 			}
 		},
 		{
-			"id": 25,
+			"myId": 25,
 			"title": "Don't go to work. You  lost your job.",
 			"description": "",
 			"value": 0,
@@ -292,7 +302,7 @@
 			"substituteObject": {}
 		},
 		{
-			"id": 26,
+			"myId": 26,
 			"title": "No you don't get the loan",
 			"description": "",
 			"value": 0,
@@ -302,7 +312,7 @@
 			"substituteObject": {}
 		},
 		{
-			"id": 27,
+			"myId": 27,
 			"title": "Try to get a loan
 Need $5,000 in collateral or FAIL Automatic win if HAVE LOAN",
 			"description": "",
@@ -311,6 +321,8 @@ Need $5,000 in collateral or FAIL Automatic win if HAVE LOAN",
 			"spacesForward": 0,
 			"substituteIf": "NOT_HAS_5000",
 			"substituteObject": {
+				"myId": 27,
+
 				"title": "You don't have $5000 ",
 				"description": "",
 
@@ -320,7 +332,7 @@ Need $5,000 in collateral or FAIL Automatic win if HAVE LOAN",
 			}
 		},
 		{
-			"id": 28,
+			"myId": 28,
 			"title": "You get the loan to start a business",
 			"description": "",
 			"value": 1594,
@@ -330,7 +342,7 @@ Need $5,000 in collateral or FAIL Automatic win if HAVE LOAN",
 			"substituteObject": {}
 		},
 		{
-			"id": 29,
+			"myId": 29,
 			"title": "Fails, no band",
 			"description": "",
 			"value": 0,
@@ -340,7 +352,7 @@ Need $5,000 in collateral or FAIL Automatic win if HAVE LOAN",
 			"substituteObject": {}
 		},
 		{
-			"id": 30,
+			"myId": 30,
 			"title": "Try to make a band. ",
 			"description": "",
 			"value": 0,
@@ -348,6 +360,8 @@ Need $5,000 in collateral or FAIL Automatic win if HAVE LOAN",
 			"spacesForward": 0,
 			"substituteIf": "HAVE_BAND",
 			"substituteObject": {
+				"myId": 30,
+
 				"title": "You already have a band ",
 				"description": "",
 				"value": 0,
@@ -357,7 +371,7 @@ Need $5,000 in collateral or FAIL Automatic win if HAVE LOAN",
 			
 		},
 		{
-			"id": 31,
+			"myId": 31,
 			"title": "Success, band formed",
 			"description": "",
 			"value": 7430,
@@ -367,7 +381,7 @@ Need $5,000 in collateral or FAIL Automatic win if HAVE LOAN",
 			"substituteObject": {}
 		},
 		{
-			"id": 32,
+			"myId": 32,
 			"title": "Not approved for unemployment",
 			"description": "",
 			"value": 0,
@@ -377,7 +391,7 @@ Need $5,000 in collateral or FAIL Automatic win if HAVE LOAN",
 			"substituteObject": {}
 		},
 		{
-			"id": 33,
+			"myId": 33,
 			"title": "You apply for unemployment",
 			"description": "",
 			"value": 0,
@@ -387,7 +401,7 @@ Need $5,000 in collateral or FAIL Automatic win if HAVE LOAN",
 			"substituteObject": {}
 		},
 		{
-			"id": 34,
+			"myId": 34,
 			"title": "Receive 600",
 			"description": "",
 			"value": 600,
@@ -395,6 +409,8 @@ Need $5,000 in collateral or FAIL Automatic win if HAVE LOAN",
 			"spacesForward": 16,
 			"substituteIf": "INFLATED",
 			"substituteObject": {
+				"myId": 34,
+
 				"title": "Receive $600",
 				"description": "",
 				"value": 0,
@@ -404,7 +420,7 @@ Need $5,000 in collateral or FAIL Automatic win if HAVE LOAN",
 			}
 		},
 		{
-			"id": 35,
+			"myId": 35,
 			"title": "Is  the inflation match act passed? ",
 			"description": "",
 			"value": 0,
@@ -412,6 +428,8 @@ Need $5,000 in collateral or FAIL Automatic win if HAVE LOAN",
 			"spacesForward": 15,
 			"substituteIf": "IRA",
 			"substituteObject": {
+				"myId": 35,
+
 				"title": "You have theinflation match?Collect $100 extrafor housing ifcontinue if you do",
 				"description": "",
 				"value": 100,
@@ -420,7 +438,7 @@ Need $5,000 in collateral or FAIL Automatic win if HAVE LOAN",
 			}
 		},
 		{
-			"id": 36,
+			"myId": 36,
 			"title": "No my product doesnt help the world",
 			"description": "",
 			"value": 0,
@@ -430,7 +448,7 @@ Need $5,000 in collateral or FAIL Automatic win if HAVE LOAN",
 			"substituteObject": {}
 		},
 		{
-			"id": 37,
+			"myId": 37,
 			"title": "Do you have a product that helps the world?",
 			"description": "",
 			"value": 0,
@@ -440,7 +458,7 @@ Need $5,000 in collateral or FAIL Automatic win if HAVE LOAN",
 			"substituteObject": {}
 		},
 		{
-			"id": 38,
+			"myId": 38,
 			"title": "Yes my product helps the world",
 			"description": "",
 			"value": 0,
@@ -450,7 +468,7 @@ Need $5,000 in collateral or FAIL Automatic win if HAVE LOAN",
 			"substituteObject": {}
 		},
 		{
-			"id": 39,
+			"myId": 39,
 			"title": "Cool think of a sweet band name!",
 			"description": "",
 			"value": 9164,
@@ -458,6 +476,7 @@ Need $5,000 in collateral or FAIL Automatic win if HAVE LOAN",
 			"spacesForward": 5,
 			"substituteIf": "HAS_BAND_NAME",
 			"substituteObject": {
+				"myId": 39,
 
 				"title": "You have a band name",
 				"description": "",
@@ -467,7 +486,7 @@ Need $5,000 in collateral or FAIL Automatic win if HAVE LOAN",
 			}
 		},
 		{
-			"id": 40,
+			"myId": 40,
 			"title": "No soup",
 			"description": "",
 			"value": 0,
@@ -477,7 +496,7 @@ Need $5,000 in collateral or FAIL Automatic win if HAVE LOAN",
 			"substituteObject": {}
 		},
 		{
-			"id": 41,
+			"myId": 41,
 			"title": "Go to soup kitchen",
 			"description": "",
 			"value": 0,
@@ -487,7 +506,7 @@ Need $5,000 in collateral or FAIL Automatic win if HAVE LOAN",
 			"substituteObject": {}
 		},
 		{
-			"id": 42,
+			"myId": 42,
 			"title": "Have soup: gain $100",
 			"description": "",
 			"value": 100,
@@ -495,6 +514,7 @@ Need $5,000 in collateral or FAIL Automatic win if HAVE LOAN",
 			"spacesForward": 15,
 			"substituteIf": "INFLATED",
 			"substituteObject": {
+				"myId": 42,
 
 				"title": "Prices are inflated, so there might be less soup. Do you have the Inflation Act?",
 				"description": "",
@@ -504,7 +524,7 @@ Need $5,000 in collateral or FAIL Automatic win if HAVE LOAN",
 			}
 		},
 		{
-			"id": 43,
+			"myId": 43,
 			"title": "You don't have the inflation Act. ",
 			"description": "",
 			"value": 0,
@@ -512,6 +532,7 @@ Need $5,000 in collateral or FAIL Automatic win if HAVE LOAN",
 			"spacesForward": 14,
 			"substituteIf": "IRA",
 			"substituteObject": {
+				"myId": 43,
 
 				"title": "Gain $200",
 				"description": "",
@@ -521,7 +542,7 @@ Need $5,000 in collateral or FAIL Automatic win if HAVE LOAN",
 			}
 		},
 		{
-			"id": 44,
+			"myId": 44,
 			"title": "Your band breaks up",
 			"description": "",
 			"value": 8032,
@@ -531,7 +552,7 @@ Need $5,000 in collateral or FAIL Automatic win if HAVE LOAN",
 			"substituteObject": {}
 		},
 		{
-			"id": 45,
+			"myId": 45,
 			"title": "Band funds can afford basic materials",
 			"description": "",
 			"value": 6115,
@@ -539,6 +560,8 @@ Need $5,000 in collateral or FAIL Automatic win if HAVE LOAN",
 			"spacesForward": 0,
 			"substituteIf": "HAS_INSTRUMENTS",
 			"substituteObject": {
+				"myId": 45,
+
 				"title": "You already have instruments",
 				"description": "",
 				"value": 0,
@@ -547,7 +570,7 @@ Need $5,000 in collateral or FAIL Automatic win if HAVE LOAN",
 			}
 		},
 		{
-			"id": 46,
+			"myId": 46,
 			"title": "Your bandcontinues andstarts to jam onthe instruments",
 			"description": "",
 			"value": 23580,
@@ -557,7 +580,7 @@ Need $5,000 in collateral or FAIL Automatic win if HAVE LOAN",
 			"substituteObject": {}
 		},
 		{
-			"id": 47,
+			"myId": 47,
 			"title": "Left unapproved",
 			"description": "",
 			"value": 0,
@@ -567,7 +590,7 @@ Need $5,000 in collateral or FAIL Automatic win if HAVE LOAN",
 			"substituteObject": {}
 		},
 		{
-			"id": 48,
+			"myId": 48,
 			"title": "Do you have a product shareholders are interested in?",
 			"description": "",
 			"value": 0,
@@ -577,7 +600,7 @@ Need $5,000 in collateral or FAIL Automatic win if HAVE LOAN",
 			"substituteObject": {}
 		},
 		{
-			"id": 49,
+			"myId": 49,
 			"title": "Gain $5000 from investors",
 			"description": "",
 			"value": 5000,
@@ -587,7 +610,7 @@ Need $5,000 in collateral or FAIL Automatic win if HAVE LOAN",
 			"substituteObject": {}
 		},
 		{
-			"id": 50,
+			"myId": 50,
 			"title": "Lose $100",
 			"description": "",
 			"value": -100,
@@ -597,7 +620,7 @@ Need $5,000 in collateral or FAIL Automatic win if HAVE LOAN",
 			"substituteObject": {}
 		},
 		{
-			"id": 51,
+			"myId": 51,
 			"title": "Got fined",
 			"description": "",
 			"value": 0,
@@ -607,7 +630,7 @@ Need $5,000 in collateral or FAIL Automatic win if HAVE LOAN",
 			"substituteObject": {}
 		},
 		{
-			"id": 52,
+			"myId": 52,
 			"title": "Able to fight in court",
 			"description": "",
 			"value": 0,
@@ -617,7 +640,7 @@ Need $5,000 in collateral or FAIL Automatic win if HAVE LOAN",
 			"substituteObject": {}
 		},
 		{
-			"id": 53,
+			"myId": 53,
 			"title": "No my song makes the world a worse place",
 			"description": "",
 			"value": 0,
@@ -627,7 +650,7 @@ Need $5,000 in collateral or FAIL Automatic win if HAVE LOAN",
 			"substituteObject": {}
 		},
 		{
-			"id": 54,
+			"myId": 54,
 			"title": "Think up a song title. Is it a song that helps the world?",
 			"description": "",
 			"value": 0,
@@ -637,7 +660,7 @@ Need $5,000 in collateral or FAIL Automatic win if HAVE LOAN",
 			"substituteObject": {}
 		},
 		{
-			"id": 55,
+			"myId": 55,
 			"title": "Yes my song helps the world",
 			"description": "",
 			"value": 0,
@@ -647,7 +670,7 @@ Need $5,000 in collateral or FAIL Automatic win if HAVE LOAN",
 			"substituteObject": {}
 		},
 		{
-			"id": 56,
+			"myId": 56,
 			"title": "Not hungry enough",
 			"description": "",
 			"value": 0,
@@ -657,7 +680,7 @@ Need $5,000 in collateral or FAIL Automatic win if HAVE LOAN",
 			"substituteObject": {}
 		},
 		{
-			"id": 57,
+			"myId": 57,
 			"title": "Still hungry?",
 			"description": "",
 			"value": 0,
@@ -667,7 +690,7 @@ Need $5,000 in collateral or FAIL Automatic win if HAVE LOAN",
 			"substituteObject": {}
 		},
 		{
-			"id": 58,
+			"myId": 58,
 			"title": "Receive $50 extra for food",
 			"description": "",
 			"value": 50,
@@ -677,7 +700,7 @@ Need $5,000 in collateral or FAIL Automatic win if HAVE LOAN",
 			"substituteObject": {}
 		},
 		{
-			"id": 59,
+			"myId": 59,
 			"title": "Nobody ever hears your music",
 			"description": "",
 			"value": 0,
@@ -687,7 +710,7 @@ Need $5,000 in collateral or FAIL Automatic win if HAVE LOAN",
 			"substituteObject": {}
 		},
 		{
-			"id": 60,
+			"myId": 60,
 			"title": "Do you have aproduct thataudiencesare interested in?",
 			"description": "",
 			"value": 0,
@@ -697,7 +720,7 @@ Need $5,000 in collateral or FAIL Automatic win if HAVE LOAN",
 			"substituteObject": {}
 		},
 		{
-			"id": 61,
+			"myId": 61,
 			"title": "Gain $100 * number of fans on spotify",
 			"description": "",
 			"value": 100,
@@ -707,7 +730,7 @@ Need $5,000 in collateral or FAIL Automatic win if HAVE LOAN",
 			"substituteObject": {}
 		},
 		{
-			"id": 62,
+			"myId": 62,
 			"title": "Police arrest you for begging",
 			"description": "",
 			"value": 0,
@@ -717,7 +740,7 @@ Need $5,000 in collateral or FAIL Automatic win if HAVE LOAN",
 			"substituteObject": {}
 		},
 		{
-			"id": 63,
+			"myId": 63,
 			"title": "Beg for money",
 			"description": "",
 			"value": 0,
@@ -727,7 +750,7 @@ Need $5,000 in collateral or FAIL Automatic win if HAVE LOAN",
 			"substituteObject": {}
 		},
 		{
-			"id": 64,
+			"myId": 64,
 			"title": "Escape from police presence, successfully collect the money",
 			"description": "",
 			"value": 0,
@@ -737,7 +760,7 @@ Need $5,000 in collateral or FAIL Automatic win if HAVE LOAN",
 			"substituteObject": {}
 		},
 		{
-			"id": 65,
+			"myId": 65,
 			"title": "Pay $10,000 and become the BOSS",
 			"description": "",
 			"value": 8055,
@@ -745,6 +768,8 @@ Need $5,000 in collateral or FAIL Automatic win if HAVE LOAN",
 			"spacesForward": 16,
 			"substituteIf": "BOSS",
 			"substituteObject": {
+				"myId": 65,
+
 				"title": "You already are the BOSS",
 				"description": "",
 				"value": 0,
@@ -753,8 +778,8 @@ Need $5,000 in collateral or FAIL Automatic win if HAVE LOAN",
 			}
 		},
 		{
-			"id": 66,
-			"title": "No you can't fo on tour",
+			"myId": 66,
+			"title": "No you can't go on tour",
 			"description": "",
 			"value": 0,
 			"type": "a",
@@ -763,7 +788,7 @@ Need $5,000 in collateral or FAIL Automatic win if HAVE LOAN",
 			"substituteObject": {}
 		},
 		{
-			"id": 67,
+			"myId": 67,
 			"title": "Do you want to go on tour? Costs $5000 ",
 			"description": "",
 			"value": 30763,
@@ -775,7 +800,277 @@ Need $5,000 in collateral or FAIL Automatic win if HAVE LOAN",
 			}
 		},
 		{
-			"id": 68,
+			"myId": 68,
+			"title": "You peddle onSpotify to yourfans, add 1 toyour fan count",
+			"description": "",
+			"value": 0,
+			"type": "fansgain",
+			"spacesForward": 4,
+			"substituteIf": "",
+			"substituteObject": {}
+		},
+		{
+			"myId": 69,
+			"title": "Rounding thecorner… thingshave to getbetter!",
+			"description": "",
+			"value": 0,
+			"type": "",
+			"spacesForward": 0,
+			"substituteIf": "",
+			"substituteObject": {}
+		},
+		{
+			"myId": 70,
+			"title": "The tour is a big hit, roll and add that to your number of fans",
+			"description": "",
+			"value": 0,
+			"type": "",
+			"spacesForward": 2,
+			"substituteIf": "",
+			"substituteObject": {}
+		},
+		{
+			"myId": 71,
+			"title": "Gain $500 for evading police",
+			"description": "",
+			"value": 500,
+			"type": "payday",
+			"spacesForward": 6,
+			"substituteIf": "",
+			"substituteObject": {}
+		},
+		{
+			"myId": 72,
+			"title": "Survive anotherday, collect$500 + numberof fans*100, loseband ",
+			"description": "",
+			"value": 0,
+			"type": "spotifyfanspayout",
+			"spacesForward": 2,
+			"substituteIf": "",
+			"substituteObject": {}
+		},
+		{
+			"myId": 73,
+			"title": "No band breaks up",
+			"description": "",
+			"value": 8032,
+			"type": "a",
+			"spacesForward": 4,
+			"substituteIf": "",
+			"substituteObject": {}
+		},
+		{
+			"myId": 74,
+			"title": "Band stays togehter",
+			"description": "",
+			"value": 0,
+			"type": "contest",
+			"spacesForward": 0,
+			"substituteIf": "",
+			"substituteObject": {}
+		},
+		{
+			"myId": 75,
+			"title": "Yes band stays together",
+			"description": "",
+			"value": 0,
+			"type": "a",
+			"spacesForward": 0,
+			"substituteIf": "",
+			"substituteObject": {}
+		},
+		{
+			"myId": 76,
+			"title": "The market is working in arealistic way.racist business owners,shortages, corruption.Bosses are usingprofits to justify increasingprices. Add inflation token",
+			"description": "",
+			"value": 6969,
+			"type": "a",
+			"spacesForward": 4,
+			"substituteIf": "",
+			"substituteObject": {}
+		},
+		{
+			"myId": 77,
+			"title": "HEALTH OF THEMARKETHow is themarket workingtoday?",
+			"description": "",
+			"value": 0,
+			"type": "contest",
+			"spacesForward": 0,
+			"substituteIf": "",
+			"substituteObject": {}
+		},
+		{
+			"myId": 78,
+			"title": "The market is workingmyIdealistically.There are no racist businessowners,shortages, or corruption.Bosses arenʼt usingprofits to justify increasingprices",
+			"description": "",
+			"value": 9696,
+			"type": "a",
+			"spacesForward": 2,
+			"substituteIf": "",
+			"substituteObject": {}
+		},
+		{
+			"myId": 79,
+			"title": "Canʼt get yourneeds met",
+			"description": "",
+			"value": 5550,
+			"type": "a",
+			"spacesForward": 4,
+			"substituteIf": "",
+			"substituteObject": {}
+		},
+		{
+			"myId": 80,
+			"title": "Pay for Expenses$600 or $800 ifhave inflationtoken",
+			"description": "",
+			"value": 2244,
+			"type": "payout",
+			"spacesForward": 0,
+			"substituteIf": "",
+			"substituteObject": {}
+		},
+		{
+			"myId": 81,
+			"title": "Check off haveneeds met",
+			"description": "",
+			"value": 5550,
+			"type": "a",
+			"spacesForward": 1,
+			"substituteIf": "",
+			"substituteObject": {}
+		},
+		{
+			"myId": 82,
+			"title": "Have meal withfamily",
+			"description": "",
+			"value": 0,
+			"type": "a",
+			"spacesForward": 5,
+			"substituteIf": "",
+			"substituteObject": {}
+		},
+		{
+			"myId": 83,
+			"title": "See if you have support from friends",
+			"description": "",
+			"value": 0,
+			"type": "a",
+			"spacesForward": 2,
+			"substituteIf": "",
+			"substituteObject": {}
+		},
+		{
+			"myId": 84,
+			"title": "See if you have support from friends",
+			"description": "",
+			"value": 0,
+			"type": "a",
+			"spacesForward": 2,
+			"substituteIf": "",
+			"substituteObject": {}
+		},
+		{
+			"myId": 85,
+			"title": "No friends can help you at the moment.",
+			"description": "",
+			"value": 0,
+			"type": "a",
+			"spacesForward": 4,
+			"substituteIf": "",
+			"substituteObject": {}
+		},
+		{
+			"myId": 86,
+			"title": "Do you have afriend youcan stay with",
+			"description": "",
+			"value": 0,
+			"type": "contest",
+			"spacesForward": 0,
+			"substituteIf": "",
+			"substituteObject": {}
+		},
+		{
+			"myId": 87,
+			"title": "Have meal withfamily",
+			"description": "",
+			"value": 0,
+			"type": "a",
+			"spacesForward": 2,
+			"substituteIf": "",
+			"substituteObject": {}
+		},
+		{
+			"myId": 88,
+			"title": "Your family feelsyou not present.They resent you",
+			"description": "",
+			"value": 0,
+			"type": "a",
+			"spacesForward": 3,
+			"substituteIf": "",
+			"substituteObject": {}
+		},
+		{
+			"myId": 89,
+			"title": "Spend time withyour kmyIds andpartner",
+			"description": "",
+			"value": 0,
+			"type": "contest",
+			"spacesForward": 0,
+			"substituteIf": "",
+			"substituteObject": {}
+		},
+		{
+			"myId": 90,
+			"title": "Your family feelsthey care",
+			"description": "",
+			"value": 0,
+			"type": "a",
+			"spacesForward": 3,
+			"substituteIf": "",
+			"substituteObject": {}
+		},
+		{
+			"myId": 91,
+			"title": "How close areyou to yourdream of havinga band? ",
+			"description": "",
+			"value": 0,
+			"type": "a",
+			"spacesForward": 2,
+			"substituteIf": "",
+			"substituteObject": {}
+		},
+		{
+			"myId": 92,
+			"title": "No there isn't",
+			"description": "No, there isnʼtDo you want togo on tour? BACK TOBEGIN DAY",
+			"value": 8080,
+			"type": "teleport",
+			"spacesForward": 24,
+			"substituteIf": "",
+			"substituteObject": {}
+		},
+		{
+			"myId": 93,
+			"title": "Is there a stateprogram thatimproves your life byguaranteeing wagesand social programs?match inflation.Automatic fail if noinflation",
+			"description": "",
+			"value": 0,
+			"type": "contest",
+			"spacesForward": 0,
+			"substituteIf": "",
+			"substituteObject": {}
+		},
+		{
+			"myId": 94,
+			"title": "Yes thereʼs aninflation program(Gain inflation matchtoken) BACK TO BEGIN DAY",
+			"description": "",
+			"value": 1212,
+			"type": "teleport",
+			"spacesForward": 24,
+			"substituteIf": "",
+			"substituteObject": {}
+		},
+		{
+			"myId": 95,
 			"title": "",
 			"description": "",
 			"value": 0,
@@ -785,7 +1080,7 @@ Need $5,000 in collateral or FAIL Automatic win if HAVE LOAN",
 			"substituteObject": {}
 		},
 		{
-			"id": 69,
+			"myId": 96,
 			"title": "",
 			"description": "",
 			"value": 0,
@@ -795,277 +1090,7 @@ Need $5,000 in collateral or FAIL Automatic win if HAVE LOAN",
 			"substituteObject": {}
 		},
 		{
-			"id": 70,
-			"title": "",
-			"description": "",
-			"value": 0,
-			"type": "",
-			"spacesForward": 0,
-			"substituteIf": "",
-			"substituteObject": {}
-		},
-		{
-			"id": 71,
-			"title": "",
-			"description": "",
-			"value": 0,
-			"type": "",
-			"spacesForward": 0,
-			"substituteIf": "",
-			"substituteObject": {}
-		},
-		{
-			"id": 72,
-			"title": "",
-			"description": "",
-			"value": 0,
-			"type": "",
-			"spacesForward": 0,
-			"substituteIf": "",
-			"substituteObject": {}
-		},
-		{
-			"id": 73,
-			"title": "",
-			"description": "",
-			"value": 0,
-			"type": "",
-			"spacesForward": 0,
-			"substituteIf": "",
-			"substituteObject": {}
-		},
-		{
-			"id": 74,
-			"title": "",
-			"description": "",
-			"value": 0,
-			"type": "",
-			"spacesForward": 0,
-			"substituteIf": "",
-			"substituteObject": {}
-		},
-		{
-			"id": 75,
-			"title": "",
-			"description": "",
-			"value": 0,
-			"type": "",
-			"spacesForward": 0,
-			"substituteIf": "",
-			"substituteObject": {}
-		},
-		{
-			"id": 76,
-			"title": "",
-			"description": "",
-			"value": 0,
-			"type": "",
-			"spacesForward": 0,
-			"substituteIf": "",
-			"substituteObject": {}
-		},
-		{
-			"id": 77,
-			"title": "",
-			"description": "",
-			"value": 0,
-			"type": "",
-			"spacesForward": 0,
-			"substituteIf": "",
-			"substituteObject": {}
-		},
-		{
-			"id": 78,
-			"title": "",
-			"description": "",
-			"value": 0,
-			"type": "",
-			"spacesForward": 0,
-			"substituteIf": "",
-			"substituteObject": {}
-		},
-		{
-			"id": 79,
-			"title": "",
-			"description": "",
-			"value": 0,
-			"type": "",
-			"spacesForward": 0,
-			"substituteIf": "",
-			"substituteObject": {}
-		},
-		{
-			"id": 80,
-			"title": "",
-			"description": "",
-			"value": 0,
-			"type": "",
-			"spacesForward": 0,
-			"substituteIf": "",
-			"substituteObject": {}
-		},
-		{
-			"id": 81,
-			"title": "",
-			"description": "",
-			"value": 0,
-			"type": "",
-			"spacesForward": 0,
-			"substituteIf": "",
-			"substituteObject": {}
-		},
-		{
-			"id": 82,
-			"title": "",
-			"description": "",
-			"value": 0,
-			"type": "",
-			"spacesForward": 0,
-			"substituteIf": "",
-			"substituteObject": {}
-		},
-		{
-			"id": 83,
-			"title": "",
-			"description": "",
-			"value": 0,
-			"type": "",
-			"spacesForward": 0,
-			"substituteIf": "",
-			"substituteObject": {}
-		},
-		{
-			"id": 84,
-			"title": "",
-			"description": "",
-			"value": 0,
-			"type": "",
-			"spacesForward": 0,
-			"substituteIf": "",
-			"substituteObject": {}
-		},
-		{
-			"id": 85,
-			"title": "",
-			"description": "",
-			"value": 0,
-			"type": "",
-			"spacesForward": 0,
-			"substituteIf": "",
-			"substituteObject": {}
-		},
-		{
-			"id": 86,
-			"title": "",
-			"description": "",
-			"value": 0,
-			"type": "",
-			"spacesForward": 0,
-			"substituteIf": "",
-			"substituteObject": {}
-		},
-		{
-			"id": 87,
-			"title": "",
-			"description": "",
-			"value": 0,
-			"type": "",
-			"spacesForward": 0,
-			"substituteIf": "",
-			"substituteObject": {}
-		},
-		{
-			"id": 88,
-			"title": "",
-			"description": "",
-			"value": 0,
-			"type": "",
-			"spacesForward": 0,
-			"substituteIf": "",
-			"substituteObject": {}
-		},
-		{
-			"id": 89,
-			"title": "",
-			"description": "",
-			"value": 0,
-			"type": "",
-			"spacesForward": 0,
-			"substituteIf": "",
-			"substituteObject": {}
-		},
-		{
-			"id": 90,
-			"title": "",
-			"description": "",
-			"value": 0,
-			"type": "",
-			"spacesForward": 0,
-			"substituteIf": "",
-			"substituteObject": {}
-		},
-		{
-			"id": 91,
-			"title": "",
-			"description": "",
-			"value": 0,
-			"type": "",
-			"spacesForward": 0,
-			"substituteIf": "",
-			"substituteObject": {}
-		},
-		{
-			"id": 92,
-			"title": "",
-			"description": "",
-			"value": 0,
-			"type": "",
-			"spacesForward": 0,
-			"substituteIf": "",
-			"substituteObject": {}
-		},
-		{
-			"id": 93,
-			"title": "",
-			"description": "",
-			"value": 0,
-			"type": "",
-			"spacesForward": 0,
-			"substituteIf": "",
-			"substituteObject": {}
-		},
-		{
-			"id": 94,
-			"title": "",
-			"description": "",
-			"value": 0,
-			"type": "",
-			"spacesForward": 0,
-			"substituteIf": "",
-			"substituteObject": {}
-		},
-		{
-			"id": 95,
-			"title": "",
-			"description": "",
-			"value": 0,
-			"type": "",
-			"spacesForward": 0,
-			"substituteIf": "",
-			"substituteObject": {}
-		},
-		{
-			"id": 96,
-			"title": "",
-			"description": "",
-			"value": 0,
-			"type": "",
-			"spacesForward": 0,
-			"substituteIf": "",
-			"substituteObject": {}
-		},
-		{
-			"id": 97,
+			"myId": 97,
 			"title": "",
 			"description": "",
 			"value": 0,
