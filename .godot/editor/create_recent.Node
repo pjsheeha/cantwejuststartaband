@@ -1,5 +1,6 @@
 Label
+Control
+Node2D
 Button
 GridContainer
 Container
-Control

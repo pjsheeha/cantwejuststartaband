@@ -1,24 +1,27 @@
 extends Control
-@onready var daysLabel = get_node("days");
-@onready var fansLabel = get_node("fans");
-@onready var moneyLabel = get_node("money");
-@onready var attributesLabel = get_node("attributes");
-@onready var roll_daily = get_node("roll-day");
-@onready var die1 = get_node("die1");
-@onready var die2 = get_node("die2");
-@onready var die3 = get_node("die3");
-@onready var die4 = get_node("die4");
-@onready var die5 = get_node("die5");
-@onready var die6 = get_node("die6");
-@onready var yourdie = get_node("yourdie");
-@onready var selectedText = get_node("selected");
-@onready var resultsText = get_node("results");
-@onready var whoWinsText = get_node("whowins");
-@onready var option1 = get_node("option1");
-@onready var option2 = get_node("option2");
-@onready var currentPos = get_node("position-label");
-@onready var winPosition = get_node("option1/win-position");
-@onready var losePosition = get_node("option2/lose-position");
+@onready var daysLabel = get_node("display/days");
+@onready var fansLabel = get_node("display/fans");
+@onready var moneyLabel = get_node("display/money");
+@onready var attributesLabel = get_node("display/attributes");
+@onready var roll_daily = get_node("display/roll-day");
+@onready var die1 = get_node("display/die1");
+
+@onready var die2 = get_node("display/die2");
+@onready var die3 = get_node("display/die3");
+@onready var die4 = get_node("display/die4");
+@onready var die5 = get_node("display/die5");
+@onready var die6 = get_node("display/die6");
+@onready var yourdie = get_node("display/yourdie");
+@onready var selectedText = get_node("display/selected");
+@onready var resultsText = get_node("display/results");
+@onready var whoWinsText = get_node("display/whowins");
+@onready var option1 = get_node("display/option1");
+@onready var option2 = get_node("display/option2");
+@onready var currentPos = get_node("display/position-label");
+@onready var winPosition = get_node("display/option1/win-position");
+@onready var losePosition = get_node("display/option2/lose-position");
+@onready var display = get_node("display");
+@onready var feedback = get_node("feedback");
 
 var temp_attr = '';
 var dice;
@@ -43,6 +46,7 @@ var attributes = [];
 var spaces_to_go = 0;
 var substituting = false;
 var money = 0;
+var health = 6;
 var direction = -1;
 var automatic_status = 'none';
 var temp_money = 0;
@@ -50,7 +54,8 @@ var inflation_value = 0;
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	roll_daily.text = "Click me"
-
+	feedback.visible = false;
+	display.visible =true;
 	randomize();
 
 	dice = [die1,die2,die3,die4,die5,die6]
@@ -65,6 +70,7 @@ func _ready():
 	json_data = load_json_file(json_scene)
 
 	attributes.append('HIRED');
+
 	setupAll();
 	initialRoll();
 	
@@ -72,10 +78,27 @@ func _ready():
 
 func initialRoll():
 	roll_daily.disabled = false;
-	for die in dice :
-		die.disabled = true;
+	print(health)
+	for die in health :
+		dice[die].disabled = true;
+	print(dice)
+	var newdice =[]
+	for d in dice.size() :
+		
+		if (d>health-1):
+			print('true')
+			dice[d].visible = false;
+			
+		else:
+			newdice.append(dice[d])
+	dice = newdice;
 	option1.disabled = true;
 	option2.disabled = true;
+
+func makeEverythingInvisible():
+	feedback.visible = true;
+	display.visible =false;
+	print('p')
 
 func setupAll():
 	resultsText.text = '';
@@ -89,16 +112,21 @@ func setupAll():
 	for a in attributes:
 		if (a == json_data['stages'][current_json_id]['substituteIf']):
 			json_stage = json_data['stages'][current_json_id]['substituteObject'];
+	if (current_json_id <24):
+		direction = -1
+
+	if (current_json_id >24):
+		direction = 1
+
+	#automatic_status = "none"
+
 	deciding_die()
 	if (json_stage["value"] == 1337):	##1337 is FIRED
 		if (attributes.count('FIRED')==0):
 			attributes.append('FIRED');
 			if (attributes.count('HIRED')>0):
 				attributes.remove_at(attributes.find('HIRED'));
-	elif (json_stage["value"] == 1000):
-		#if (attributes.count('NEEDS_NOT_MET')==0):	#1000 is NEEDS_NOT_MET
-			#attributes.append('NEEDS_NOT_MET');
-		print('Hello')
+
 	elif (json_stage["value"] == 7430): 	#7430 is HAS_BAND
 		if (attributes.count('HAS_BAND')==0):
 			attributes.append('HAS_BAND');
@@ -140,7 +168,8 @@ func setupAll():
 	elif (json_stage["value"] == 8080):	#8080 is remove IRA
 		if (attributes.count('IRA')>0):
 			attributes.remove_at(attributes.find('IRA'));
-
+	elif (json_stage["value"] == 5432):	#5432 is sent to prison
+		health-=3;
 	elif (json_stage["value"] == 5550):	#5550 is remove NEEDS_NOT_MET
 		if (attributes.count('NEEDS_NOT_MET')>0):
 			attributes.remove_at(attributes.find('NEEDS_NOT_MET'));
@@ -196,16 +225,15 @@ func setupAll():
 	elif (json_stage["value"] == 2244): #NEEDS_MET
 		inflation_value_result(600)
 
-		print('hello')
 		if money >= 600+inflation_value:
-			print('opt1disabledfalse')
+
 			temp_money = 600+inflation_value
 
 			option1.disabled = false
 			option2.disabled = false
 			automatic_status = "true"	
 		else:
-			print('opt2disabledfalse')
+
 			option1.disabled = true
 			option2.disabled = false
 			automatic_status = "false"
@@ -215,7 +243,7 @@ func setupAll():
 
 
 
-	print(dieDailyArchive);
+
 	for d in dieDailyArchive:
 
 		
@@ -236,30 +264,26 @@ func setupAll():
 	fansLabel.text = "fans: "+str(fans);
 	moneyLabel.text = "money: "+ str(money);
 	daysLabel.text = "days: "+str(days);
-
-	if (json_stage["myId"] ==23):
-		direction = -1
-	if (json_stage["myId"] >25):
-		direction = 1
-	if (json_stage["myId"] == 24):
+	if (current_json_id == 24):
 		roll_daily_rolled = false
-		if (attributes.has("NEEDS_MET")):
-			attributes.remove_at(attributes.find('NEEDS_MET'));
-		else:
-			var opop = 0
-			var goalToDelete = randi() % dice.size();
-			for d in dice.size():
-				if (goalToDelete == opop):
-					dice.remove_at(attributes.find(dice[d]));
-				opop += 1;
-			
+		direction = 1
+		if (days>0):
+			if (attributes.has("NEEDS_MET")):
+				attributes.remove_at(attributes.find('NEEDS_MET'));
+			else:
+				if (health > 0):
+					health -=1
+				if (health == 0):
+					makeEverythingInvisible();
+
+				
 		diceVals = [0,0,0,0,0,0]
 		for o in dice:
 			o.text = ''
 		dieDailyArchive.clear();
 		initialRoll();
 	#		
-	#automatic_status = "none"
+
 #	pass
 
 func inflation_value_result(temp_money_val):		
@@ -268,8 +292,7 @@ func inflation_value_result(temp_money_val):
 
 		if (attributes.count('IRA')>0):
 			inflation_value = 0
-		else: 
-			inflation_value = 0
+
 
 func deciding_die():
 	var winId = 0;
@@ -280,7 +303,7 @@ func deciding_die():
 		for p in dice:
 			p.disabled = false
 		winId = current_json_id + direction;
-		loseId= current_json_id + -1*direction;
+		loseId= current_json_id + (-1*direction);
 		option1.disabled = true;
 		option2.disabled = true;
 		win = json_data['stages'][winId]['title']
@@ -290,7 +313,7 @@ func deciding_die():
 			p.disabled = true
 		winId = current_json_id + direction;
 		#money+=json_stage['value']
-		loseId= current_json_id + -1*direction;
+		loseId= current_json_id + (-1*direction);
 		option1.disabled = true;
 		option2.disabled = true;
 		win = json_data['stages'][winId]['title']
@@ -346,7 +369,7 @@ func _button_pressed_advance(opt):
 		current_json_id = json_stage["spacesForward"];
 
 	elif (json_stage["type"] == 'contest'):
-		print('dio', dieIndex)
+
 		dieDailyArchive.append(dieIndex);
 		if (opt == 1):
 
@@ -354,7 +377,7 @@ func _button_pressed_advance(opt):
 		elif (opt == 2):
 			current_json_id += -1*direction;
 	if (json_stage["type"] == 'payout'):
-		print(automatic_status);
+
 		if (opt == 1):
 			money -= temp_money
 			if (attributes.count(temp_attr)==0):
@@ -397,14 +420,27 @@ func _button_pressed_advance(opt):
 		#dieDailyArchive.append(dieIndex);
 		
 		
+	if (current_json_id == 81 or current_json_id == 79):
 
-
-	if (dieDailyArchive.size() >= 6):
 		current_json_id = 24;
 		days +=1;
+		setupAll();
+
 		dieDailyArchive.clear();
 		roll_daily_rolled = false
-	setupAll();
+	else:
+		if (dieDailyArchive.size() >= health):
+			if (current_json_id == 94 or current_json_id == 92):	
+				print('hello')
+			else:
+				current_json_id = 80;
+			setupAll();
+
+
+		else:
+			setupAll();
+
+
 
 
 	pass

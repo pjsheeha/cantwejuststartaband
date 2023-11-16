@@ -11,70 +11,75 @@ offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("1_0e0h2")
 
-[node name="die1" type="Button" parent="Control2"]
-layout_mode = 2
+[node name="display" type="Control" parent="Control2"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="die1" type="Button" parent="Control2/display"]
+layout_mode = 0
 offset_left = 162.0
 offset_top = 544.0
 offset_right = 225.0
 offset_bottom = 616.0
 
-[node name="die2" type="Button" parent="Control2"]
-layout_mode = 2
+[node name="die2" type="Button" parent="Control2/display"]
+layout_mode = 0
 offset_left = 254.0
 offset_top = 542.0
 offset_right = 317.0
 offset_bottom = 614.0
 
-[node name="die3" type="Button" parent="Control2"]
-layout_mode = 2
+[node name="die3" type="Button" parent="Control2/display"]
+layout_mode = 0
 offset_left = 341.0
 offset_top = 540.0
 offset_right = 404.0
 offset_bottom = 612.0
 
-[node name="die4" type="Button" parent="Control2"]
-layout_mode = 2
+[node name="die4" type="Button" parent="Control2/display"]
+layout_mode = 0
 offset_left = 426.0
 offset_top = 541.0
 offset_right = 489.0
 offset_bottom = 613.0
 
-[node name="die5" type="Button" parent="Control2"]
-layout_mode = 2
+[node name="die5" type="Button" parent="Control2/display"]
+layout_mode = 0
 offset_left = 515.0
 offset_top = 539.0
 offset_right = 578.0
 offset_bottom = 611.0
 
-[node name="die6" type="Button" parent="Control2"]
-layout_mode = 2
+[node name="die6" type="Button" parent="Control2/display"]
+layout_mode = 0
 offset_left = 604.0
 offset_top = 542.0
 offset_right = 667.0
 offset_bottom = 614.0
 
-[node name="yourdie" type="Button" parent="Control2"]
-layout_mode = 2
+[node name="yourdie" type="Button" parent="Control2/display"]
+layout_mode = 0
 offset_left = 934.0
 offset_top = 540.0
 offset_right = 997.0
 offset_bottom = 612.0
 
-[node name="roll-day" type="Button" parent="Control2"]
-layout_mode = 2
+[node name="roll-day" type="Button" parent="Control2/display"]
+layout_mode = 0
 offset_left = 63.0
 offset_top = 545.0
 offset_right = 126.0
 offset_bottom = 617.0
 
-[node name="option1" type="Button" parent="Control2"]
-layout_mode = 2
+[node name="option1" type="Button" parent="Control2/display"]
+layout_mode = 0
 offset_left = 639.0
 offset_top = 323.0
 offset_right = 1145.0
 offset_bottom = 395.0
 
-[node name="win-position" type="RichTextLabel" parent="Control2/option1"]
+[node name="win-position" type="RichTextLabel" parent="Control2/display/option1"]
 layout_mode = 0
 offset_left = 36.0
 offset_top = 22.0
@@ -83,14 +88,14 @@ offset_bottom = 94.0
 mouse_filter = 2
 text = "sdlkasldjsalkjdklajdkljakjddlkasjkdasldjaklsdjlskajdlkajsdlka"
 
-[node name="option2" type="Button" parent="Control2"]
-layout_mode = 2
+[node name="option2" type="Button" parent="Control2/display"]
+layout_mode = 0
 offset_left = 21.0
 offset_top = 312.0
 offset_right = 521.0
 offset_bottom = 384.0
 
-[node name="lose-position" type="RichTextLabel" parent="Control2/option2"]
+[node name="lose-position" type="RichTextLabel" parent="Control2/display/option2"]
 layout_mode = 0
 offset_left = 28.0
 offset_top = 15.0
@@ -100,36 +105,39 @@ scale = Vector2(0.978934, 1)
 mouse_filter = 2
 text = "sdlkasldjsalkjdklajdkljakjddlkasjkdasldjaklsdjlskajdlkajsdlka"
 
-[node name="selected" type="RichTextLabel" parent="Control2"]
+[node name="selected" type="RichTextLabel" parent="Control2/display"]
 layout_mode = 0
 offset_left = 207.0
 offset_top = 8.0
 offset_right = 431.0
 offset_bottom = 80.0
 
-[node name="position-label" type="RichTextLabel" parent="Control2"]
+[node name="position-label" type="RichTextLabel" parent="Control2/display"]
 layout_mode = 0
-offset_left = 330.0
-offset_top = 410.0
-offset_right = 831.0
-offset_bottom = 482.0
+offset_left = 176.0
+offset_top = 171.0
+offset_right = 997.0
+offset_bottom = 300.0
+theme_override_font_sizes/normal_font_size = 27
+theme_override_font_sizes/bold_font_size = 4
 text = "sdlkasldjsalkjdklajdkljakjddlkasjkdasldjaklsdjlskajdlkajsdlka"
+text_direction = 1
 
-[node name="results" type="RichTextLabel" parent="Control2"]
+[node name="results" type="RichTextLabel" parent="Control2/display"]
 layout_mode = 0
 offset_left = 476.0
 offset_top = 13.0
 offset_right = 575.0
 offset_bottom = 85.0
 
-[node name="whowins" type="RichTextLabel" parent="Control2"]
+[node name="whowins" type="RichTextLabel" parent="Control2/display"]
 layout_mode = 0
 offset_left = 624.0
 offset_top = 18.0
 offset_right = 840.0
 offset_bottom = 90.0
 
-[node name="days" type="Label" parent="Control2"]
+[node name="days" type="Label" parent="Control2/display"]
 layout_mode = 1
 anchors_preset = -1
 offset_left = 26.0
@@ -138,7 +146,16 @@ offset_right = 142.0
 offset_bottom = 79.0
 text = "days: "
 
-[node name="money" type="Label" parent="Control2"]
+[node name="goal" type="Label" parent="Control2/display"]
+layout_mode = 1
+anchors_preset = -1
+offset_left = 247.0
+offset_top = 9.0
+offset_right = 363.0
+offset_bottom = 35.0
+text = "Goal: Form a band, get the most fans."
+
+[node name="money" type="Label" parent="Control2/display"]
 layout_mode = 1
 anchors_preset = -1
 offset_left = 26.0
@@ -147,7 +164,7 @@ offset_right = 142.0
 offset_bottom = 125.0
 text = "money: "
 
-[node name="fans" type="Label" parent="Control2"]
+[node name="fans" type="Label" parent="Control2/display"]
 layout_mode = 1
 anchors_preset = -1
 offset_left = 27.0
@@ -156,7 +173,7 @@ offset_right = 143.0
 offset_bottom = 163.0
 text = "fans: "
 
-[node name="attributes" type="Label" parent="Control2"]
+[node name="attributes" type="Label" parent="Control2/display"]
 layout_mode = 1
 anchors_preset = -1
 offset_left = 912.0
@@ -164,3 +181,14 @@ offset_top = 22.0
 offset_right = 1129.0
 offset_bottom = 307.0
 text = "attributes: "
+
+[node name="feedback" type="Control" parent="Control2"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="gameOver" type="Label" parent="Control2/feedback"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Ga,e Over"
