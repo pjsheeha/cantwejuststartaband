@@ -1,8 +1,10 @@
 ea4bc82a6ad023ab7ee23ee620429895
-::res://::1699671155
-my_scene.json::JSON::-1::1699650651::0::1::::<><>::
-test.tscn::PackedScene::7158594814484015367::1699650714::0::1::::<><>::
-::res://Scenes/::1695761370
-::res://UI/::1699650866
-Control_UI.gd::GDScript::-1::1699650388::0::1::::<>Control<>::
-ui.tscn::PackedScene::6865127731049429823::1699650866::0::1::::<><>::res://UI/Control_UI.gd
+::res://::1700118354
+export_presets.cfg::TextFile::-1::1700118215::0::1::::<><>::
+icon.svg::CompressedTexture2D::6835960491304835060::1700118344::1700118354::1::::<><>::
+my_scene.json::JSON::-1::1700116874::0::1::::<><>::
+test.tscn::PackedScene::7158594814484015367::1700117765::0::1::::<><>::
+::res://Scenes/::1700118331
+::res://UI/::1700117788
+Control_UI.gd::GDScript::-1::1700117478::0::1::::<>Control<>::
+ui.tscn::PackedScene::6865127731049429823::1700117788::0::1::::<><>::res://UI/Control_UI.gd

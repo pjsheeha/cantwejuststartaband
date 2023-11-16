@@ -149,10 +149,10 @@ text = "days: "
 [node name="goal" type="Label" parent="Control2/display"]
 layout_mode = 1
 anchors_preset = -1
-offset_left = 247.0
-offset_top = 9.0
-offset_right = 363.0
-offset_bottom = 35.0
+offset_left = 411.0
+offset_top = 625.0
+offset_right = 700.0
+offset_bottom = 651.0
 text = "Goal: Form a band, get the most fans."
 
 [node name="money" type="Label" parent="Control2/display"]

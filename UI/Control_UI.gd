@@ -45,7 +45,7 @@ var current_json_id = 24;
 var attributes = [];
 var spaces_to_go = 0;
 var substituting = false;
-var money = 0;
+var money = 500;
 var health = 6;
 var direction = -1;
 var automatic_status = 'none';
@@ -69,8 +69,8 @@ func _ready():
 	yourdie.disabled = true
 	json_data = load_json_file(json_scene)
 
-	attributes.append('HIRED');
-
+	#attributes.append('HIRED');
+	attributes.append('INFLATED');
 	setupAll();
 	initialRoll();
 	
@@ -121,6 +121,22 @@ func setupAll():
 	#automatic_status = "none"
 
 	deciding_die()
+	
+	if (json_stage["type"] == "payday"):
+		money += json_stage["value"];
+	elif (json_stage["type"] == "rollpaydayboss"):
+		money += json_stage["value"]+ ((randi() % 6)+1);
+	elif (json_stage["type"] == "spotifyfanspayout"):
+		money += 500+ (fans*100); 
+	elif (json_stage["type"] == "fansgain"):
+		fans+=1 
+	elif (json_stage["type"] == "fansrandomincrease"):
+		fans+=1 *((randi() % 6)+1)
+	elif (json_stage["type"] == "fansrandomincreasetour"):
+		fans+= ((randi() % 6)+1)
+		fans+= ((randi() % 6)+1)
+		fans+= ((randi() % 6)+1)
+		money+= 100 *((randi() % 10)+1)
 	if (json_stage["value"] == 1337):	##1337 is FIRED
 		if (attributes.count('FIRED')==0):
 			attributes.append('FIRED');
@@ -179,7 +195,7 @@ func setupAll():
 	elif (json_stage["value"] == 6115): #HAS_INSTRUMENT
 		if (attributes.count('HAS_INSTRUMENTS')==0):
 			inflation_value_result(500)
-			if money > 500+inflation_value:
+			if money >= 500+inflation_value:
 				temp_money = 500+inflation_value
 				automatic_status = "true"	
 				option1.disabled = false
@@ -196,7 +212,7 @@ func setupAll():
 	elif (json_stage["value"] == 8055): #BOSS
 		if (attributes.count('BOSS')==0):
 			inflation_value_result(10000)
-			if money > 10000+inflation_value:
+			if money >= 10000+inflation_value:
 				temp_money = 10000+inflation_value
 				automatic_status = "true"
 				option1.disabled = false
@@ -212,7 +228,7 @@ func setupAll():
 		temp_attr = 'BOSS'
 	elif (json_stage["value"] == 30763): #CONCERT
 		inflation_value_result(5000)
-		if money > 5000+inflation_value:
+		if money >= 5000+inflation_value:
 			option1.disabled = false
 			option2.disabled = false
 			temp_money = 5000+inflation_value
@@ -239,10 +255,9 @@ func setupAll():
 			automatic_status = "false"
 		temp_attr = 'NEEDS_MET'
 
-	currentPos.text = json_stage['title'];
-
-
-
+	# Assuming json_stage['title'] is a String containing the text you want to modify
+	var title = generate_text_pay(json_stage['title'])
+	currentPos.text = title
 
 	for d in dieDailyArchive:
 
@@ -286,10 +301,36 @@ func setupAll():
 
 #	pass
 
+func generate_text_pay(title):
+	var regex = RegEx.new()
+	regex.compile("\\$([0-9]+) \\+ inflation")
+	var result = regex.search(title)
+	var matches = regex.search_all(title)
+	var s= title
+
+	if result:
+		for match in matches: 
+			var number = match.get_string(1)
+			print(number)
+			var myfutureinflation = 0;
+			if (attributes.count('INFLATED')>0):
+				myfutureinflation = (number.to_int()*.3)+20
+				print(myfutureinflation)
+				if (attributes.count('IRA')>0):
+					myfutureinflation = 0
+			var new_number = str(number.to_int() + myfutureinflation)
+			var start_pos = match.get_start()
+			var end_pos = match.get_end()
+			s = title.substr(0, start_pos) + str(new_number) + title.substr(end_pos)
+	return s
+
+
+
+	
 func inflation_value_result(temp_money_val):		
 	if (attributes.count('INFLATED')>0):
 		inflation_value = (temp_money_val*.3)+20
-
+		print(inflation_value)
 		if (attributes.count('IRA')>0):
 			inflation_value = 0
 
@@ -306,8 +347,15 @@ func deciding_die():
 		loseId= current_json_id + (-1*direction);
 		option1.disabled = true;
 		option2.disabled = true;
-		win = json_data['stages'][winId]['title']
-		lose = json_data['stages'][loseId]['title']
+		
+		win = generate_text_pay(json_data['stages'][winId]['title'])
+		for a in attributes:
+			if (a == json_data['stages'][winId]['substituteIf']):
+				win = generate_text_pay(json_data['stages'][winId]['substituteObject']['title']);
+		lose = generate_text_pay(json_data['stages'][loseId]['title'])
+		for a in attributes:
+			if (a == json_data['stages'][loseId]['substituteIf']):
+				lose = generate_text_pay(json_data['stages'][loseId]['substituteObject']['title']);
 	elif (json_stage['type'] == 'payout'):
 		for p in dice:
 			p.disabled = true
@@ -316,8 +364,14 @@ func deciding_die():
 		loseId= current_json_id + (-1*direction);
 		option1.disabled = true;
 		option2.disabled = true;
-		win = json_data['stages'][winId]['title']
-		lose = json_data['stages'][loseId]['title']
+		win = generate_text_pay(json_data['stages'][winId]['title'])
+		for a in attributes:
+			if (a == json_data['stages'][winId]['substituteIf']):
+				win = generate_text_pay(json_data['stages'][winId]['substituteObject']['title']);
+		lose = generate_text_pay(json_data['stages'][loseId]['title'])
+		for a in attributes:
+			if (a == json_data['stages'][loseId]['substituteIf']):
+				lose = generate_text_pay(json_data['stages'][loseId]['substituteObject']['title']);
 	else:
 		for piu in dice:
 
@@ -328,17 +382,27 @@ func deciding_die():
 				winId= current_json_id + json_stage['spacesForward'];
 				option2.disabled = true;
 				option1.disabled = false;
-				win = json_data['stages'][winId]['title']
+				win = generate_text_pay(json_data['stages'][winId]['title'])
+				for a in attributes:
+					if (a == json_data['stages'][winId]['substituteIf']):
+						win = generate_text_pay(json_data['stages'][winId]['substituteObject']['title']);
 			elif (json_stage['spacesForward']<0):
 				loseId= current_json_id + json_stage['spacesForward'];
-				lose = json_data['stages'][loseId]['title']
+				lose = generate_text_pay(json_data['stages'][loseId]['title'])
+				for a in attributes:
+					if (a == json_data['stages'][loseId]['substituteIf']):
+						lose = generate_text_pay(json_data['stages'][loseId]['substituteObject']['title']);
 				option2.disabled = false;
 				option1.disabled = true;
 		else:
 			winId=  json_stage['spacesForward'];
 			option2.disabled = true;
 			option1.disabled = false;
-			win = json_data['stages'][winId]['title']
+
+			win = generate_text_pay(json_data['stages'][winId]['title'])
+			for a in attributes:
+				if (a == json_data['stages'][winId]['substituteIf']):
+					win = generate_text_pay(json_data['stages'][winId]['substituteObject']['title']);
 			pass
 	winPosition.text = win
 	losePosition.text = lose
@@ -348,22 +412,17 @@ func _button_pressed_advance(opt):
 	if (json_stage["type"] == "a"):
 		current_json_id += json_stage["spacesForward"];
 	elif (json_stage["type"] == "payday"):
-
-		money += json_stage["value"];
-
 		current_json_id += json_stage["spacesForward"];
 	elif (json_stage["type"] == "rollpaydayboss"):
-		money += json_stage["value"]+ ((randi() % 6)+1);
 		current_json_id += json_stage["spacesForward"];
 	elif (json_stage["type"] == "spotifyfanspayout"):
-		money += 500+ (fans*100); 
 		current_json_id += json_stage["spacesForward"];
 	elif (json_stage["type"] == "fansgain"):
-		fans+=1 
+
 		current_json_id += json_stage["spacesForward"];
 		
 	elif (json_stage["type"] == "fansrandomincrease"):
-		fans+=1 *((randi() % 6)+1)
+
 		current_json_id += json_stage["spacesForward"];
 	elif (json_stage["type"] == "teleport"):
 		current_json_id = json_stage["spacesForward"];
@@ -430,7 +489,7 @@ func _button_pressed_advance(opt):
 		roll_daily_rolled = false
 	else:
 		if (dieDailyArchive.size() >= health):
-			if (current_json_id == 94 or current_json_id == 92):	
+			if (current_json_id == 93):	
 				print('hello')
 			else:
 				current_json_id = 80;
