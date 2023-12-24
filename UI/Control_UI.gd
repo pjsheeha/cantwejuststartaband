@@ -17,9 +17,9 @@ extends Control
 @onready var whoWinsText = get_node("display/whowins");
 @onready var option1 = get_node("display/option1");
 @onready var option2 = get_node("display/option2");
-@onready var currentPos = get_node("display/position-label");
-@onready var winPosition = get_node("display/option1/win-position");
-@onready var losePosition = get_node("display/option2/lose-position");
+@onready var currentPos = get_node("display/Panel/position-label");
+@onready var winPosition = get_node("display/option1");
+@onready var losePosition = get_node("display/option2");
 @onready var display = get_node("display");
 @onready var feedback = get_node("feedback");
 
@@ -50,9 +50,15 @@ var health = 6;
 var direction = -1;
 var automatic_status = 'none';
 var temp_money = 0;
+var myTheme =  get_theme();
+var foundDiceStyle = myTheme.get_stylebox('found', "ShowDice");
+var panelDiceStyle = myTheme.get_stylebox('panel', "ShowDice");
+
 var inflation_value = 0;
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	myTheme = get_theme();
+
 	roll_daily.text = "Click me"
 	feedback.visible = false;
 	display.visible =true;
@@ -100,18 +106,37 @@ func makeEverythingInvisible():
 	display.visible =false;
 	print('p')
 
+
+func recursiveLookThrough(myS):
+	var myL = myS
+	if (myL.has('substituteIf')):
+		for a in attributes:
+			print(myL['substituteIf'] );
+			if (a == myL['substituteIf']):
+				myL=recursiveLookThrough(myL['substituteObject']);
+				return myL
+	return myL
+
 func setupAll():
 	resultsText.text = '';
 	whoWinsText.text = ''
 	yourdie.text = ''
-	selectedText.text = '';
+	print(selectedText);	
+
+
+	myTheme.set_stylebox('panel', "ShowDice", panelDiceStyle);
+
+	myTheme.set_stylebox('panel', "whiteDice", myTheme.get_stylebox('die0', 'whiteDice'));
+
+
 
 	json_stage = json_data['stages'][current_json_id];
-	
+	json_stage=recursiveLookThrough(json_stage)
 
-	for a in attributes:
-		if (a == json_data['stages'][current_json_id]['substituteIf']):
-			json_stage = json_data['stages'][current_json_id]['substituteObject'];
+
+#	for a in attributes:
+#		if (a == json_data['stages'][current_json_id]['substituteIf']):
+#			json_stage = json_data['stages'][current_json_id]['substituteObject'];
 	if (current_json_id <24):
 		direction = -1
 
@@ -563,10 +588,14 @@ func _button_pressed_die_selected(di):
 		dieVal = int(diceVals[di])
 		selected = str(diceVals[di])
 	if (selected != ''):
-		selectedText.text = 'your selected die is '+selected+ '.';
+		#selectedText.text = 'your selected die is '+selected+ '.';
+		myTheme.set_stylebox('panel', "ShowDice", foundDiceStyle);
+		myTheme.set_stylebox('panel', "whiteDice", myTheme.get_stylebox('die'+selected, 'whiteDice'));
 		yourdie.disabled = false
 	else: 
-		selectedText.text = "You haven't selected a die to roll against";
+		#selectedText.text = "You haven't selected a die to roll against";
+		myTheme.set_stylebox('panel', "ShowDice", panelDiceStyle);
+		myTheme.set_stylebox('panel', "whiteDice", myTheme.get_stylebox('die0', 'whiteDice'));
 		yourdie.disabled = true
 	if (selected != ''):
 		if (dieVal == 6):

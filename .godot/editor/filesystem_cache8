@@ -1,10 +1,17 @@
 ea4bc82a6ad023ab7ee23ee620429895
-::res://::1700118354
-export_presets.cfg::TextFile::-1::1700118215::0::1::::<><>::
+::res://::1703443855
+export_presets.cfg::TextFile::-1::1700118376::0::1::::<><>::
 icon.svg::CompressedTexture2D::6835960491304835060::1700118344::1700118354::1::::<><>::
-my_scene.json::JSON::-1::1700116874::0::1::::<><>::
-test.tscn::PackedScene::7158594814484015367::1700117765::0::1::::<><>::
+my_scene.json::JSON::-1::1703438157::0::1::::<><>::
+new_theme.tres::Theme::8164987356296499483::1703440659::0::1::::<><>::uid://caync6cxleasv::::res://UI/GUI2.png<>uid://d2ude73bfktlu::::res://font/Inkspot 2.ttf
+test.tscn::PackedScene::7158594814484015367::1703443855::0::1::::<><>::
+::res://font/::1702532149
+chinese rocks rg.otf::FontFile::3504646095937677558::1624629600::1702532084::1::::<><>::
+Inkspot 2.ttf::FontFile::9095839402595552790::1117377386::1702532149::1::::<><>::
+::res://images/::1702532402
+patch_text.png::CompressedTexture2D::8178457446736016749::1702532244::1702532402::1::::<><>::
 ::res://Scenes/::1700118331
-::res://UI/::1700117788
-Control_UI.gd::GDScript::-1::1700117478::0::1::::<>Control<>::
-ui.tscn::PackedScene::6865127731049429823::1700117788::0::1::::<><>::res://UI/Control_UI.gd
+::res://UI/::1703444140
+Control_UI.gd::GDScript::-1::1703443853::0::1::::<>Control<>::
+GUI2.png::CompressedTexture2D::4823180958350746153::1703444140::1703444141::1::::<><>::
+ui.tscn::PackedScene::6865127731049429823::1703443855::0::1::::<><>::res://UI/Control_UI.gd<>uid://dolgfcb7n4kdv::::res://new_theme.tres<>uid://bp6xakuhmx2bq::::res://font/chinese rocks rg.otf

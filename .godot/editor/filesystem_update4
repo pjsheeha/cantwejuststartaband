@@ -1,4 +1,5 @@
 res://UI/ui.tscn
+res://new_theme.tres
 res://my_scene.json
 res://UI/Control_UI.gd
 res://test.tscn
